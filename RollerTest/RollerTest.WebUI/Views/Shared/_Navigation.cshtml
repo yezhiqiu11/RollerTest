@@ -1,0 +1,120 @@
+﻿<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element">
+                    <span>
+                        <img alt="image" class="img-circle" src="~/Images/profile_small.jpg" />
+                    </span>
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <span class="clear">
+                            <span class="block m-t-xs">
+                                <strong class="font-bold">王 欢</strong>
+                            </span> <span class="text-muted text-xs block">工程师 <b class="caret"></b></span>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <li><a href="@Url.Action("Profile", "AppViews")">待添加</a></li>
+                        <li><a href="@Url.Action("Contacts", "AppViews")">待添加</a></li>
+                        <li><a href="@Url.Action("Inbox", "Mailbox")">待添加</a></li>
+                        <li class="divider"></li>
+                        <li><a href="@Url.Action("Login", "Pages")">退出登录</a></li>
+                    </ul>
+                </div>
+                <div class="logo-element">
+                    IN+
+                </div>
+            </li>
+            <li class="@Html.IsSelected(controller: "Sample")">
+                <a href="@Url.Action("Index", "Sample")"><i class="fa fa-th-large"></i> <span class="nav-label" data-i18n="nav.layouts">项目面板</span> <span class="label label-warning pull-right">16/24</span></a>
+            </li>
+            <li class="@Html.IsSelected(controller: "ControlBlock")">
+                <a href="@Url.Action("Index", "ControlBlock")"><i class="fa fa-diamond"></i> <span class="nav-label" data-i18n="nav.layouts">控制面板</span> </a>
+            </li>
+            <li class="@Html.IsSelected(controller: "TestBlock")">
+                <a href="@Url.Action("Index", "TestBlock")"><i class="fa fa-diamond"></i> <span class="nav-label" data-i18n="nav.layouts">试验面板</span> </a>
+            </li>
+            <li class="@Html.IsSelected(controller: "Graphs")">
+                <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label" data-i18n="nav.graphs">图表</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Graphs", cssClass: "in")">
+                    <li class="@Html.IsSelected(action: "Flot")"><a href="@Url.Action("Flot", "Graphs")">Flot Charts</a></li>
+                    <li class="@Html.IsSelected(action: "Morris")"><a href="@Url.Action("Morris", "Graphs")">Morris.js Charts</a></li>
+                    <li class="@Html.IsSelected(action: "Rickshaw")"><a href="@Url.Action("Rickshaw", "Graphs")">Rickshaw Charts</a></li>
+                    <li class="@Html.IsSelected(action: "Chartjs")"><a href="@Url.Action("Chartjs", "Graphs")">Chart.js</a></li>
+                    <li class="@Html.IsSelected(action: "Chartist")"><a href="@Url.Action("Chartist", "Graphs")">Chartist</a></li>
+                    <li class="@Html.IsSelected(action: "C3charts")"><a href="@Url.Action("C3charts", "Graphs")">c3 charts</a></li>
+                    <li class="@Html.IsSelected(action: "Peity")"><a href="@Url.Action("Peity", "Graphs")">Peity Charts</a></li>
+                    <li class="@Html.IsSelected(action: "Sparkline")"><a href="@Url.Action("Sparkline", "Graphs")">Sparkline Charts</a></li>
+                </ul>
+            </li>
+            <li class="@Html.IsSelected(controller: "Forms")">
+                <a href="#"><i class="fa fa-edit"></i> <span class="nav-label" data-i18n="nav.forms">表单</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Forms", cssClass: "in")">
+                    <li class="@Html.IsSelected(action: "BasicFroms")"><a href="@Url.Action("BasicFroms", "Forms")">Basic form</a></li>
+                    <li class="@Html.IsSelected(action: "Advanced")"><a href="@Url.Action("Advanced", "Forms")">Advanced Plugins</a></li>
+                    <li class="@Html.IsSelected(action: "Wizard")"><a href="@Url.Action("Wizard", "Forms")">Wizard</a></li>
+                    <li class="@Html.IsSelected(action: "FileUpload")"><a href="@Url.Action("FileUpload", "Forms")">File Upload</a></li>
+                    <li class="@Html.IsSelected(action: "TextEditor")"><a href="@Url.Action("TextEditor", "Forms")">Text Editor</a></li>
+                    <li class="@Html.IsSelected(action: "Autocomplete")"><a href="@Url.Action("Autocomplete", "Forms")">Autocomplete</a></li>
+                    <li class="@Html.IsSelected(action: "Markdown")"><a href="@Url.Action("Markdown", "Forms")">Markdown</a></li>
+                </ul>
+            </li>
+            <li class="@Html.IsSelected(controller: "AppViews")">
+                <a href="#"><i class="fa fa-desktop"></i> <span class="nav-label" data-i18n="nav.appviews">显示</span>  <span class="pull-right label label-primary">SPECIAL</span></a>
+                <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "AppViews", cssClass: "in")">
+                    <li class="@Html.IsSelected(action: "Contacts")"><a href="@Url.Action("Contacts", "AppViews")">Contacts</a></li>
+                    <li class="@Html.IsSelected(action: "Profile")"><a href="@Url.Action("Profile", "AppViews")">Profile</a></li>
+                    <li class="@Html.IsSelected(action: "Profile2")"><a href="@Url.Action("Profile2", "AppViews")">Profile v.2</a></li>
+                    <li class="@Html.IsSelected(action: "Contacts2")"><a href="@Url.Action("Contacts2", "AppViews")">Contacts v.2</a></li>
+                    <li class="@Html.IsSelected(action: "Projects")"><a href="@Url.Action("Projects", "AppViews")">Projects</a></li>
+                    <li class="@Html.IsSelected(action: "ProjectDetail")"><a href="@Url.Action("ProjectDetail", "AppViews")">Project detail</a></li>
+                    <li class="@Html.IsSelected(action: "ActivityStream")"><a href="@Url.Action("ActivityStream", "AppViews")">Activity stream</a></li>
+                    <li class="@Html.IsSelected(action: "TeamsBoard")"><a href="@Url.Action("TeamsBoard", "AppViews")">Teams board</a></li>
+                    <li class="@Html.IsSelected(action: "SocialFeed")"><a href="@Url.Action("SocialFeed", "AppViews")">Social feed</a></li>
+                    <li class="@Html.IsSelected(action: "Clients")"><a href="@Url.Action("Clients", "AppViews")">Clients</a></li>
+                    <li class="@Html.IsSelected(action: "OutlookView")"><a href="@Url.Action("OutlookView", "AppViews")">Outlook view</a></li>
+                    <li class="@Html.IsSelected(action: "VoteList")"><a href="@Url.Action("VoteList", "AppViews")">Vote list</a></li>
+                    <li class="@Html.IsSelected(action: "FileManager")"><a href="@Url.Action("FileManager", "AppViews")">File manager</a></li>
+                    <li class="@Html.IsSelected(action: "Calendar")"><a href="@Url.Action("Calendar", "AppViews")">Calendar</a></li>
+                    <li class="@Html.IsSelected(action: "IssueTracker")"><a href="@Url.Action("IssueTracker", "AppViews")">Issue tracker</a></li>
+                    <li class="@Html.IsSelected(action: "Blog")"><a href="@Url.Action("Blog", "AppViews")">Blog</a></li>
+                    <li class="@Html.IsSelected(action: "Article")"><a href="@Url.Action("Article", "AppViews")">Article</a></li>
+                    <li class="@Html.IsSelected(action: "FAQ")"><a href="@Url.Action("FAQ", "AppViews")">FAQ</a></li>
+                    <li class="@Html.IsSelected(action: "Timeline")"><a href="@Url.Action("Timeline", "AppViews")">Timeline</a></li>
+                    <li class="@Html.IsSelected(action: "PinBoard")"><a href="@Url.Action("PinBoard", "AppViews")">Pin board</a></li>
+                </ul>
+            </li>
+            <li class="@Html.IsSelected(controller: "Tables")">
+                <a href="#"><i class="fa fa-table"></i> <span class="nav-label" data-i18n="nav.tables">表格</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Tables", cssClass: "in")">
+                    <li class="@Html.IsSelected(action: "StaticTables")"><a href="@Url.Action("StaticTables", "Tables")">Static Tables</a></li>
+                    <li class="@Html.IsSelected(action: "DataTables")"><a href="@Url.Action("DataTables", "Tables")">Data Tables</a></li>
+                    <li class="@Html.IsSelected(action: "FooTables")"><a href="@Url.Action("FooTables", "Tables")">Foo Table</a></li>
+                    <li class="@Html.IsSelected(action: "jqGrid")"><a href="@Url.Action("jqGrid", "Tables")">jqGrid</a></li>
+                </ul>
+            </li>
+            <li class="@Html.IsSelected(controller: "Ecommerce")">
+                <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label" data-i18n="nav.ecommerce">设置</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Ecommerce", cssClass: "in")">
+                    <li class="@Html.IsSelected(action: "ProductsGrid")"><a href="@Url.Action("ProductsGrid", "Ecommerce")">Products grid</a></li>
+                    <li class="@Html.IsSelected(action: "ProductsList")"><a href="@Url.Action("ProductsList", "Ecommerce")">Products list</a></li>
+                    <li class="@Html.IsSelected(action: "ProductEdit")"><a href="@Url.Action("ProductEdit", "Ecommerce")">Product edit</a></li>
+                    <li class="@Html.IsSelected(action: "ProductDetail")"><a href="@Url.Action("ProductDetail", "Ecommerce")">Product detail</a></li>
+                    <li class="@Html.IsSelected(action: "Cart")"><a href="@Url.Action("Cart", "Ecommerce")">Cart</a></li>
+                    <li class="@Html.IsSelected(action: "Orders")"><a href="@Url.Action("Orders", "Ecommerce")">Orders</a></li>
+                    <li class="@Html.IsSelected(action: "Payments")"><a href="@Url.Action("Payments", "Ecommerce")">Credit Card form</a></li>
+                </ul>
+            </li>
+            <li class="@Html.IsSelected(controller: "Admin")">
+                <a href="#"><i class="fa fa-database"></i> <span class="nav-label" data-i18n="nav.gallery">基础库</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Admin", cssClass: "in")">
+                    <li class="@Html.IsSelected(action: "index")"><a href="@Url.Action("index", "RollerBaseConditions")">试验条件</a></li>
+                    <li class="@Html.IsSelected(action: "index")"><a href="@Url.Action("index", "RollerBaseLocations")">试验地点</a></li>
+                    <li class="@Html.IsSelected(action: "index")"><a href="@Url.Action("index", "RollerBaseStations")">试验装置</a></li>
+                    <li class="@Html.IsSelected(action: "index")"><a href="@Url.Action("index", "RollerBaseStandards")">试验标准</a></li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+</nav>

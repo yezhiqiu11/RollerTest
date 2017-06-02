@@ -1,0 +1,164 @@
+﻿@model RollerTest.WebUI.Models.ControlBlockViewModel
+@{
+    ViewBag.Title = "Index";
+}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>控制面板</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("Index", "Home")">主页</a>
+            </li>
+            <li>
+                <a>控制面板</a>
+            </li>
+            <li class="active">
+                <strong>控制参数</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+<div class="row wrapper wrapper-content animated fadeInRight">
+    <div class="col-lg-6">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>读写控制</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-wrench"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li>
+                            <a href="#">Config option 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Config option 2</a>
+                        </li>
+                    </ul>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div>
+                    <p><strong>后台数据</strong></p>
+                    <p>@{Html.RenderPartial("ReadInifileView", Model.readiniModel);} </p>
+                </div>
+                <div>
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>写入状态:</h5>
+                            <div class="ibox-tools">
+                                <span class="label label-warning-light">@ViewData["FileTimerState"]</span>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <div>
+                                <div class="feed-activity-list">
+                                    <div class="feed-element">
+                                        <div class="media-body ">
+                                            <strong>王 欢</strong> 提示 <br>
+                                            <small class="text-muted">点击开启后，将开启后台任务，指定向文件中写入累计试验值。</small>
+                                            <div class="pull-right">
+                                                <a href="~/ControlBlock/FileOpenTimer"><input type="button" class="btn btn-xs btn-white fa fa-thumbs-up" value="开启" /></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="feed-element">
+                                        <div class="media-body ">
+                                            <strong>王 欢</strong> 提示 <br>
+                                            <small class="text-muted">点击关闭后，将关闭后台任务，停止向文件中写入累计试验值。</small>
+                                            <div class="pull-right">
+                                                <a href="~/ControlBlock/FileCloseTimer"><input type="button" class="btn btn-xs btn-white fa fa-thumbs-up" value="关闭" /></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                                     
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>电机控制</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-wrench"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li>
+                            <a href="#">Config option 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Config option 2</a>
+                        </li>
+                    </ul>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div
+                     
+                     >
+                    <div class="ibox-title">
+                        <h5>初始化状态:</h5>
+                        <div class="ibox-tools">
+                            <span class="label label-info">@ViewData["CdioInitState"]</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>监视状态:</h5>
+                            <div class="ibox-tools">
+                                <span class="label label-warning-light">@ViewData["CdioTimerState"]</span>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <div>
+                                <div class="feed-activity-list">
+                                    <div class="feed-element">
+                                        <div class="media-body ">
+                                            <strong>王 欢</strong> 提示 <br>
+                                            <small class="text-muted">点击开启后，将开启后台任务，实施监控电机状态。</small>
+                                            <div class="pull-right">
+                                                <a href="~/ControlBlock/CdioOpenTimer"><input type="button" class="btn btn-xs btn-white fa fa-thumbs-up" value="开启" /></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="feed-element">
+                                        <div class="media-body ">
+                                            <strong>王 欢</strong> 提示 <br>
+                                            <small class="text-muted">点击关闭后，将关闭后台任务，停止实施监控电机状态。</small>
+                                            <div class="pull-right">
+                                                <a href="~/ControlBlock/CdioCloseTimer"><input type="button" class="btn btn-xs btn-white fa fa-thumbs-up" value="关闭" /></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

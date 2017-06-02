@@ -1,0 +1,33 @@
+﻿@model IEnumerable<RollerTest.Domain.Entities.RollerBaseLocation>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>试验地点</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Location)
+        </th>
+        <th>Action</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Location)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.RollerBaseLocationID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.RollerBaseLocationID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.RollerBaseLocationID })
+        </td>
+    </tr>
+}
+
+</table>

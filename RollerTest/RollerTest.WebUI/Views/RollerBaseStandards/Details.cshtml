@@ -1,0 +1,26 @@
+﻿@model RollerTest.Domain.Entities.RollerBaseStandard
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RollerBaseStandard</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Standard)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Standard)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RollerBaseStandardID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

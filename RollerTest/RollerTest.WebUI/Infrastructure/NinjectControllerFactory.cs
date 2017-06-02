@@ -5,6 +5,8 @@ using System.Web;
 using Ninject;
 using System.Web.Mvc;
 using System.Web.Routing;
+using RollerTest.Domain.Abstract;
+using RollerTest.Domain.Concrete;
 
 namespace RollerTest.WebUI.Infrastructure
 {
@@ -24,6 +26,14 @@ namespace RollerTest.WebUI.Infrastructure
         private void AddBinding()
         {
             //添加绑定
+
+            ninjectKernel.Bind<IRealtimeinfoRepository>().To<EFRealtimeinfoRepository>();
+            ninjectKernel.Bind<IRecordinfoRepository>().To<EFRecordinfoRepository>();
+            ninjectKernel.Bind<ISampleinfoRepository>().To<EFSampleinfoRepository>();
+            ninjectKernel.Bind<ITestreportinfoRepository>().To<EFTestreportinfoRepository>();
+            ninjectKernel.Bind<IProjectRepository>().To<EFProjectinfoRepository>();
+            ninjectKernel.Bind<IBaseRepository>().To<EFBaseRepository>();
+
         }
     }
 }

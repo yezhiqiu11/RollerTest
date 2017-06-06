@@ -12,6 +12,7 @@ namespace RollerTest.Domain.Entities
         [Key]
         public int RollerTestReportInfoID { get; set; }
         public int RollerSampleInfoId { get; set; }
+        public virtual RollerSampleInfo RollerSampleInfo { get; set; }
         public bool StartStatus { get; set; }
         public string StartText { get; set; }
         public bool EndStatus { get; set; }

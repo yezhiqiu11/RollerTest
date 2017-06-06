@@ -12,6 +12,7 @@ namespace RollerTest.Domain.Entities
         [Key]
         public int RollerRealtimeInfoID { get; set; }
         public int RollerSampleInfoId { get; set; }
+        public virtual RollerSampleInfo RollerSampleInfo { get; set; }
         public DateTime CurrentTime { get; set; }
         public TimeSpan TotalTime { get; set; }
         public float CurrentValue { get; set; }

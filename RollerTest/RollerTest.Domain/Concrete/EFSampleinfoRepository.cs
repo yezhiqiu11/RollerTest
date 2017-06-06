@@ -41,12 +41,11 @@ namespace RollerTest.Domain.Concrete
                 RollerSampleInfo dbEntry = context.RollerSampleInfos.Find(rollersampleinfo.RollerSampleInfoID);
                 if (dbEntry != null)
                 {
-                    dbEntry.RollerProjectInfoId = rollersampleinfo.RollerProjectInfoId;
+                    dbEntry.RollerProjectInfo = rollersampleinfo.RollerProjectInfo;
                     dbEntry.SampleID = rollersampleinfo.SampleID;
                     dbEntry.SampleName = rollersampleinfo.SampleName;
                     dbEntry.SetValue = rollersampleinfo.SetValue;
                     dbEntry.TestStation = rollersampleinfo.TestStation;
-                    dbEntry.TestSensor = rollersampleinfo.TestSensor;
                     dbEntry.UpLimit = rollersampleinfo.UpLimit;
                     dbEntry.DnLimit = rollersampleinfo.DnLimit;
                 }

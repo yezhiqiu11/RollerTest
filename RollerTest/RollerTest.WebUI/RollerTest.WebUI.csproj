@@ -241,6 +241,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ProjectListViewModel.cs" />
+    <Compile Include="Models\SampleViewModel.cs" />
     <Compile Include="Models\SettingViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -1689,12 +1690,13 @@
     <Content Include="Views\Project\EditProject.cshtml" />
     <Content Include="Views\Project\ProjectMenu.cshtml" />
     <Content Include="Views\Sample\EditSample.cshtml" />
+    <Content Include="Views\TestBlock\Index.cshtml" />
+    <Content Include="Views\Sample\ViewInfo.cshtml" />
     <Content Include="Views\RollerBaseStations\Create.cshtml" />
     <Content Include="Views\RollerBaseStations\Delete.cshtml" />
     <Content Include="Views\RollerBaseStations\Details.cshtml" />
     <Content Include="Views\RollerBaseStations\Edit.cshtml" />
     <Content Include="Views\RollerBaseStations\Index.cshtml" />
-    <Content Include="Views\TestBlock\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RollerTest.Domain\RollerTest.Domain.csproj">

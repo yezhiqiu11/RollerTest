@@ -1,0 +1,162 @@
+﻿@model RollerTest.WebUI.Models.SampleViewModel
+
+@{
+    ViewBag.Title = "ViewInfo";
+}
+
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-3">
+            @{ Html.RenderAction("ProjectMenu", "Project");}
+        </div>
+        <div class="col-lg-9 animated fadeInRight">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>项目信息 <small>确保项目信息完整后开始试验</small></h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="fa fa-wrench"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-user">
+                                    <li>
+                                        <a href="#">Config option 1</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Config option 2</a>
+                                    </li>
+                                </ul>
+                                <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-lg-1 control-label">基本信息</label>
+
+                                    <div class="col-lg-11">
+                                        <div class="row">
+                                            <div class="col-lg-4"><input type="text" class="form-control" id="Commission" value="委托单号：@Model.rollerprojectinfo.Commission" readonly></div>
+                                            <div class="col-lg-4"><input type="text" class="form-control" id="TestName" value="试验名称：@Model.rollerprojectinfo.TestName" readonly></div>
+                                            <div class="col-lg-4"><input type="text" class="form-control" id="TestStandard" value="试验标准：@Model.rollerprojectinfo.TestStandard" readonly></div>
+                                            <div class="col-lg-4"><input type="text" class="form-control" id="TestDevice" value="试验设备：@Model.rollerprojectinfo.TestDevice" readonly></div>
+                                            <div class="col-lg-4"><input type="text" class="form-control" id="TestCondition" value="试验条件：@Model.rollerprojectinfo.TestCondition" readonly></div>
+                                            <div class="col-lg-4"><input type="text" class="form-control" id="TestLocation" value="试验地点：@Model.rollerprojectinfo.TestLocation" readonly></div>
+                                            <div class="col-lg-4"><input type="text" class="form-control" id="TestPerson" value="试验人员：@Model.rollerprojectinfo.TestPerson" readonly></div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-lg-1 control-label">样品信息</label>
+                                    <div class="container col-lg-11">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <td align="center">样品编号</td>
+                                                    <td align="center">样品名称</td>
+                                                    <td align="center">工位</td>
+                                                    <td align="center">上限值</td>
+                                                    <td align="center">下限值</td>
+                                                    <td align="center">标定值</td>
+                                                    <td align="center">操作</td>
+                                                    <td align="center">操作</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach(var p in Model.rollersampleinfos)
+                                                {
+                                                    <tr>
+                                                        <td width="15%">@p.SampleID</td>
+                                                        <td width="20%">@p.SampleName</td>
+                                                        <td width="13%">@p.TestStation</td>
+                                                        <td width="10%">@p.UpLimit</td>
+                                                        <td width="10%">@p.DnLimit</td>
+                                                        <td width="10%">@p.SetValue</td>
+                                                        <td width="6%">
+                                                            @Html.ActionLink("编辑", "EditSample", new { p.RollerSampleInfoID }, new { @class = "btn btn-white btn-sm" })
+                                                        </td>
+                                                        <td width="6%">
+                                                            @using (Html.BeginForm("DeleteSample", "Sample"))
+                                                            {
+                                                                @Html.Hidden("RollerSampleInfoID", p.RollerSampleInfoID)
+                                                                @Html.Hidden("RollerProjectInfoId",p.RollerProjectInfoId)
+                                                                <button class="btn btn-white btn-sm" type="submit">删除</button>
+                                                            }
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <div class="col-lg-4">
+                                        @*<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">增加样品</button>*@
+                                        @Html.ActionLink("增加样品", "CreateSample", new { Controller = "Sample", RollerProjectInfoID = Model.rollerprojectinfo.RollerProjectInfoID })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@*<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    编辑项目信息
+                </h4>
+            </div>
+            <div class="modal-body">
+                @Html.Action("CreateSample", "Sample",new { RollerProjectInfoID = Model.rollerprojectinfo.RollerProjectInfoID })
+            </div>
+        </div> 
+    </div>
+</div>*@
+
+
+
+
+@section Styles {
+    @Styles.Render("~/Content/plugins/iCheck/iCheckStyles")
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/iCheck")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+
+        });
+    </script>
+}
+
+
+
+
+

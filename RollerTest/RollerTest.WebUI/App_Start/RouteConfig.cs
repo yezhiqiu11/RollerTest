@@ -24,6 +24,11 @@ namespace RollerTest.WebUI
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+           // routes.MapRoute(
+           //     name: "Default1",
+           //     url: "{controller}/{action}/{id}/{Nid}",
+           //     defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional,Nid= UrlParameter.Optional }
+           //);
         }
     }
 }

@@ -59,7 +59,7 @@ namespace RollerTest.WebUI.Models
             var selectList = baserepo.RollerBaseStations.Where(a=>a.Device==device).Select(a => new SelectListItem
             {
                 Text = a.Station,
-                Value = a.Station.ToString()
+                Value = a.RollerBaseStationID.ToString()
             });
 
             return selectList;

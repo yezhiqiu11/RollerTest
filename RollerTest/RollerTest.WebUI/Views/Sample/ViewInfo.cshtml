@@ -46,11 +46,16 @@
                                             <div class="col-lg-4"><input type="text" class="form-control" id="Commission" value="委托单号：@Model.rollerprojectinfo.Commission" readonly></div>
                                             <div class="col-lg-4"><input type="text" class="form-control" id="TestName" value="试验名称：@Model.rollerprojectinfo.TestName" readonly></div>
                                             <div class="col-lg-4"><input type="text" class="form-control" id="TestStandard" value="试验标准：@Model.rollerprojectinfo.TestStandard" readonly></div>
+                                        </div>
+                                        <div>&nbsp;</div>
+                                        <div class="row">
                                             <div class="col-lg-4"><input type="text" class="form-control" id="TestDevice" value="试验设备：@Model.rollerprojectinfo.TestDevice" readonly></div>
                                             <div class="col-lg-4"><input type="text" class="form-control" id="TestCondition" value="试验条件：@Model.rollerprojectinfo.TestCondition" readonly></div>
                                             <div class="col-lg-4"><input type="text" class="form-control" id="TestLocation" value="试验地点：@Model.rollerprojectinfo.TestLocation" readonly></div>
+                                        </div>
+                                        <div>&nbsp;</div>
+                                        <div class="row">
                                             <div class="col-lg-4"><input type="text" class="form-control" id="TestPerson" value="试验人员：@Model.rollerprojectinfo.TestPerson" readonly></div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -77,7 +82,7 @@
                                                     <tr>
                                                         <td width="15%">@p.SampleID</td>
                                                         <td width="20%">@p.SampleName</td>
-                                                        <td width="13%">@p.TestStation</td>
+                                                        <td width="13%">@p.RollerBaseStation.Station</td>
                                                         <td width="10%">@p.UpLimit</td>
                                                         <td width="10%">@p.DnLimit</td>
                                                         <td width="10%">@p.SetValue</td>
@@ -88,7 +93,7 @@
                                                             @using (Html.BeginForm("DeleteSample", "Sample"))
                                                             {
                                                                 @Html.Hidden("RollerSampleInfoID", p.RollerSampleInfoID)
-                                                                @Html.Hidden("RollerProjectInfoId",p.RollerProjectInfoId)
+                                                                @Html.Hidden("RollerProjectInfoId",p.RollerProjectInfoID)
                                                                 <button class="btn btn-white btn-sm" type="submit">删除</button>
                                                             }
                                                         </td>
@@ -103,7 +108,7 @@
                                 <div class="form-group">
                                     <div class="col-lg-4">
                                         @*<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">增加样品</button>*@
-                                        @Html.ActionLink("增加样品", "CreateSample", new { Controller = "Sample", RollerProjectInfoID = Model.rollerprojectinfo.RollerProjectInfoID })
+                                        @Html.ActionLink("增加样品", "CreateSample", new { Controller = "Sample", RollerProjectInfoID = Model.rollerprojectinfo.RollerProjectInfoID },new { @class="col-lg-offset-1 col-lg-3 btn btn-primary"})
                                     </div>
                                 </div>
                             </div>

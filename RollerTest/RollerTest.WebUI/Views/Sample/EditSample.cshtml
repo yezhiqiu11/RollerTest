@@ -11,7 +11,8 @@
                 <div class="col-lg-12">
                     <form method="post" class="form-horizontal" action="~/Sample/EditSample">
                         @Html.HiddenFor(x => x.RollerSampleInfoID)
-                        @Html.HiddenFor(x=>x.RollerProjectInfoId)
+                        @Html.HiddenFor(x=>x.RollerProjectInfoID)
+                        @Html.HiddenFor(x=>x.state)
                         <div class="form-group">
                             <label class="col-sm-2 control-label">样品编号</label>
 
@@ -27,7 +28,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">工位</label>
 
-                            <div class="col-sm-10">@Html.DropDownListFor(x => x.TestStation, ViewData["StationList"] as IEnumerable<SelectListItem>, "--------------------------------------请选择-------------------------------------")</div>
+                            <div class="col-sm-10">@Html.DropDownListFor(x => x.RollerBaseStationID, ViewData["StationList"] as IEnumerable<SelectListItem>, "--------------------------------------请选择-------------------------------------")</div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="hr-line-dashed"></div>

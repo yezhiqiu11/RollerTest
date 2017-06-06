@@ -40,13 +40,13 @@ namespace RollerTest.WebUI.Controllers
         {
             SettingViewModel settingviewModel = new SettingViewModel(baserepository);
             ViewData["StationList"] = settingviewModel.GetStationList(projectrepo.RollerProjectInfos.FirstOrDefault(a=>a.RollerProjectInfoID== RollerProjectInfoID).TestDevice);
-            return View("EditSample", new RollerSampleInfo() { RollerProjectInfoId= RollerProjectInfoID });
+            return View("EditSample", new RollerSampleInfo() { RollerProjectInfoID= RollerProjectInfoID,state=false });
         }
         [HttpPost]
         public ActionResult EditSample(RollerSampleInfo rollersampleinfo)
         {
             repository.SaveRollerSampleInfo(rollersampleinfo);
-            return RedirectToAction("ViewInfo",new { RollerProjectInfoID= rollersampleinfo.RollerProjectInfoId });
+            return RedirectToAction("ViewInfo",new { RollerProjectInfoID= rollersampleinfo.RollerProjectInfoID });
         }
         [HttpGet]
         public  ViewResult EditSample(int RollerSampleInfoID)

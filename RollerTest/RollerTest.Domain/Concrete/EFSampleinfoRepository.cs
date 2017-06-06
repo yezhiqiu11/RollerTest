@@ -5,18 +5,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RollerTest.Domain.Entities;
+using RollerTest.Domain.Context;
 
 namespace RollerTest.Domain.Concrete
 {
     public class EFSampleinfoRepository : ISampleinfoRepository
     {
-        private EFDbContext context = new EFDbContext();
+        private EFDbContext context = ContextControl.GetInstance().getContext();
+
         public IQueryable<RollerSampleInfo> RollerSampleInfos
         {
             get
             {
                 return context.RollerSampleInfos;
             }
+            
         }
 
         public RollerSampleInfo DeleteRollerSampleInfo(int rollersampleinfoID)
@@ -41,11 +44,12 @@ namespace RollerTest.Domain.Concrete
                 RollerSampleInfo dbEntry = context.RollerSampleInfos.Find(rollersampleinfo.RollerSampleInfoID);
                 if (dbEntry != null)
                 {
-                    dbEntry.RollerProjectInfo = rollersampleinfo.RollerProjectInfo;
+                    dbEntry.RollerProjectInfoID = rollersampleinfo.RollerProjectInfoID;
                     dbEntry.SampleID = rollersampleinfo.SampleID;
                     dbEntry.SampleName = rollersampleinfo.SampleName;
                     dbEntry.SetValue = rollersampleinfo.SetValue;
-                    dbEntry.TestStation = rollersampleinfo.TestStation;
+                    dbEntry.RollerBaseStationID = rollersampleinfo.RollerBaseStationID;
+                    //dbEntry.RollerBaseStation = rollersampleinfo.RollerBaseStation;
                     dbEntry.UpLimit = rollersampleinfo.UpLimit;
                     dbEntry.DnLimit = rollersampleinfo.DnLimit;
                 }

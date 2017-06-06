@@ -5,12 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RollerTest.Domain.Entities;
+using RollerTest.Domain.Context;
 
 namespace RollerTest.Domain.Concrete
 {
     public class EFRealtimeinfoRepository : IRealtimeinfoRepository
     {
-        private EFDbContext context = new EFDbContext();
+        private EFDbContext context = ContextControl.GetInstance().getContext();
         public IQueryable<RollerRealtimeInfo> RollerRealtimeInfos
         {
             get

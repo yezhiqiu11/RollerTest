@@ -70,7 +70,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Mvc">
-      <HintPath>C:\Users\wanghuan\Source\Repos\FORLC\SportStore\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Windows\Microsoft.NET\Framework\v4.0.30319\Temporary ASP.NET Files\root\dd0abeab\a5eb2ea9\assembly\dl3\c8dd400d\f12fe539_cfd2d201\System.Web.Mvc.DLL</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />

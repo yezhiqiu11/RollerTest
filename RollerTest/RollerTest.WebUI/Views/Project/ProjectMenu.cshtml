@@ -2,7 +2,7 @@
 <div class="ibox float-e-margins">
     <div class="ibox-content mailbox-content">
         <div class="file-manager">
-            <a class="btn btn-block btn-primary compose-mail" data-toggle="modal" data-target="#myModal">创建项目</a>
+            <a class="btn btn-block btn-primary compose-mail" href="~/Project/CreateProject">创建项目</a>
             <div class="space-25"></div>
             <h5>项目列表</h5>
             <table class="table-striped">
@@ -12,7 +12,7 @@
                     @foreach (var p in Model.rollerprojectinfos)
                     {
                         <tr>
-                            <td width="80%">@Html.ActionLink(@p.TestName, "CreateOrEditSample", new { Controller = "Sample", Action = "CreateOrEditSample", RollerProjectInfoID = p.RollerProjectInfoID })</td>
+                            <td width="80%">@Html.ActionLink(@p.TestName, "ViewInfo", new { Controller = "Sample", Action = "ViewInfo", RollerProjectInfoID = p.RollerProjectInfoID })</td>
                             <td width="10%">@Html.ActionLink("编辑", "EditProject", new { p.RollerProjectInfoID }, new { @class = "btn btn-white btn-sm"})</td>
                             <td width="10%">
                                 @using (Html.BeginForm("DeleteProject", "Project"))
@@ -30,27 +30,4 @@
     </div>
 </div>
 
-
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    ×
-                </button>
-                <h4 class="modal-title" id="myModalLabel">
-                    编辑项目信息
-                </h4>
-            </div>
-            <div class="modal-body">
-                @Html.Action("CreateProject", "Project")
-            </div>
-            @*<div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">
-                    Close
-                </button>
-            </div>*@
-        </div> /.modal-content 
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
 

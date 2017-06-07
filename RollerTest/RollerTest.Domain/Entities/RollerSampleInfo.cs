@@ -20,7 +20,13 @@ namespace RollerTest.Domain.Entities
         public int DnLimit { get; set; }
         public int SetValue { get; set; }
         [HiddenInput(DisplayValue = false)]
-        public bool state { get; set; }
+        public bool State { get; set; }
+        [HiddenInput(DisplayValue = false)]
+        public DateTime StartTime { get; set; }
+        [HiddenInput(DisplayValue = false)]
+        public DateTime EndTime { get; set; }
+
+
         public virtual ICollection<RollerTestreportInfo> RollerTestreportInfo { get; set; }
         public virtual ICollection<RollerRecordInfo> RollerRecordInfo { get; set; }
         public virtual ICollection<RollerRealtimeInfo> RollerRealtimeInfo { get; set; }
@@ -31,8 +37,10 @@ namespace RollerTest.Domain.Entities
         [HiddenInput(DisplayValue = false)]
         public virtual RollerProjectInfo RollerProjectInfo { get; set; }
 
+        [HiddenInput(DisplayValue = false)]
         [ForeignKey("RollerBaseStation")]
         public int RollerBaseStationID { get; set; }
+        [HiddenInput(DisplayValue = false)]
         public virtual RollerBaseStation RollerBaseStation { get; set; }
 
 

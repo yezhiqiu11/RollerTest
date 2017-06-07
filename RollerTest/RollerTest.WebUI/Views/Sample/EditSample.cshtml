@@ -4,131 +4,59 @@
     ViewBag.Title = "EditSample";
 }
 
-<div class="wrapper wrapper-content">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-lg-3">
-            @{ Html.RenderAction("ProjectMenu", "Project");}
-        </div>
-        <div class="col-lg-9 animated fadeInRight">
-
+        <div class="col-lg-12">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <h5>项目信息 <small>输入项目信息并保存</small></h5>
-                            <div class="ibox-tools">
-                                <a class="collapse-link">
-                                    <i class="fa fa-chevron-up"></i>
-                                </a>
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                    <i class="fa fa-wrench"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-user">
-                                    <li>
-                                        <a href="#">Config option 1</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Config option 2</a>
-                                    </li>
-                                </ul>
-                                <a class="close-link">
-                                    <i class="fa fa-times"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="ibox-content">
-                            <form method="get" class="form-horizontal">
-                                <div class="form-group">
-                                    <label class="col-lg-1 control-label">基本信息</label>
+                    <form method="post" class="form-horizontal" action="~/Sample/EditSample">
+                        @Html.HiddenFor(x => x.RollerSampleInfoID)
+                        @Html.HiddenFor(x=>x.RollerProjectInfoID)
+                        @Html.HiddenFor(x=>x.state)
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">样品编号</label>
 
-                                    <div class="col-lg-10">
-                                        <div class="row">
-                                            <div class="col-lg-4"><input type="text" id="Commission" placeholder="委托单号" class="form-control"></div>
-                                            <div class="col-lg-4"><input type="text" id="TestName" placeholder="试验名称" class="form-control"></div>
-                                            <div class="col-lg-4">
-                                                <select class="form-control m-b" id="TestStandard">
-                                                    <option>试验标准1</option>
-                                                    <option>试验标准2</option>
-                                                    <option>试验标准3</option>
-                                                    <option>试验标准4</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <select class="form-control m-b" id="TestDevice">
-                                                    <option>试验设备1</option>
-                                                    <option>试验设备2</option>
-                                                    <option>试验设备3</option>
-                                                    <option>试验设备4</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <select class="form-control m-b" id="TestCondition">
-                                                    <option>试验条件1</option>
-                                                    <option>试验条件2</option>
-                                                    <option>试验条件3</option>
-                                                    <option>试验条件4</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <select class="form-control m-b" id="TestLocation">
-                                                    <option>试验地点1</option>
-                                                    <option>试验地点2</option>
-                                                    <option>试验地点3</option>
-                                                    <option>试验地点4</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="hr-line-dashed"></div>
-                                <div class="form-group">
-                                    <label class="col-lg-1 control-label">样品信息</label>
-                                    <div class="container col-lg-10">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <td>样品编号</td>
-                                                    <td>样品名称</td>
-                                                    <td>传感器号</td>
-                                                    <td>上限值</td>
-                                                    <td>下限值</td>
-                                                    <td>标定值</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>dd</td>
-                                                    <td>dd</td>
-                                                    <td>dd</td>
-                                                    <td>dd</td>
-                                                    <td>dd</td>
-                                                    <td>dd</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                </div>
-                                <div class="hr-line-dashed"></div>
-                                <div class="form-group">
-                                    <div class="col-lg-4">
-                                        <button class="btn btn-white" type="submit">删除</button>
-                                        <button class="btn btn-primary" type="submit">保存</button>
-                                    </div>
-                                </div>
-                            </form>
+                            <div class="col-sm-9">@Html.EditorFor(x => x.SampleID)</div>
                         </div>
-                    </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">样品名称</label>
+
+                            <div class="col-sm-9">@Html.EditorFor(x => x.SampleName)</div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">工位</label>
+
+                            <div class="col-sm-10">@Html.DropDownListFor(x => x.RollerBaseStationID, ViewData["StationList"] as IEnumerable<SelectListItem>, "--------------------------------------请选择-------------------------------------")</div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">上限值</label>
+                            <div class="col-sm-9">@Html.EditorFor(x => x.UpLimit)</div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">下限值</label>
+                            <div class="col-sm-9">@Html.EditorFor(x => x.DnLimit)</div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">设定值</label>
+                            <div class="col-sm-9">@Html.EditorFor(x => x.SetValue)</div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="col-lg-offset-5">
+                            <input class="btn btn-primary" type="submit" value="提交" />
+                            @*@Html.ActionLink("返回", "Index", "Sample")*@
+                        </div>
+                    </form>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
-
-
 
 
 @section Styles {
@@ -145,7 +73,6 @@
                 checkboxClass: 'icheckbox_square-green',
                 radioClass: 'iradio_square-green',
             });
-
         });
     </script>
 }

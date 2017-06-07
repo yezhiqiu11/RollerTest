@@ -65,6 +65,5 @@ namespace RollerTest.WebUI.Models
             return selectList;
         }
 
-
     }
 }

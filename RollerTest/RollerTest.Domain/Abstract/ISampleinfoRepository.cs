@@ -13,5 +13,7 @@ namespace RollerTest.Domain.Abstract
         void SaveRollerSampleInfo(RollerSampleInfo rollersampleinfo);
 
         RollerSampleInfo DeleteRollerSampleInfo(int rollersampleinfoID);
+
+
     }
 }

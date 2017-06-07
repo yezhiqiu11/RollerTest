@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>试验装置</h2>
+<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -18,7 +18,7 @@
             @Html.DisplayNameFor(model => model.Station)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Sensor)
+            @Html.DisplayNameFor(model => model.State)
         </th>
         <th></th>
     </tr>
@@ -32,7 +32,7 @@
             @Html.DisplayFor(modelItem => item.Station)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Sensor)
+            @Html.DisplayFor(modelItem => item.State)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.RollerBaseStationID }) |

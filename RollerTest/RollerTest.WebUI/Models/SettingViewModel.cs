@@ -22,7 +22,7 @@ namespace RollerTest.WebUI.Models
             var selectList = baserepo.RollerBaseStandards.Select(a => new SelectListItem
             {
                 Text=a.Standard,
-                Value=a.RollerBaseStandardID.ToString()
+                Value=a.Standard.ToString()
             });
             return selectList;
         }
@@ -31,7 +31,7 @@ namespace RollerTest.WebUI.Models
             var selectList = baserepo.RollerBaseConditions.Select(a => new SelectListItem
             {
                 Text = a.Condition,
-                Value = a.RollerBaseConditonID.ToString()
+                Value = a.Condition.ToString()
             });
             return selectList;
         }
@@ -40,7 +40,7 @@ namespace RollerTest.WebUI.Models
             var selectList = baserepo.RollerBaseLocations.Select(a => new SelectListItem
             {
                 Text = a.Location,
-                Value = a.RollerBaseLocationID.ToString()
+                Value = a.Location.ToString()
             });
             return selectList;
         }
@@ -49,8 +49,18 @@ namespace RollerTest.WebUI.Models
             var selectList = baserepo.RollerBaseStations.Distinct(a=>a.Device).Select(a => new SelectListItem
             {
                 Text = a.Device,
-                Value = a.RollerBaseStationID.ToString()
+                Value = a.Device.ToString()
             }) ;
+
+            return selectList;
+        }
+        public IEnumerable<SelectListItem> GetStationList(string device)
+        {
+            var selectList = baserepo.RollerBaseStations.Where(a=>a.Device==device).Select(a => new SelectListItem
+            {
+                Text = a.Station,
+                Value = a.RollerBaseStationID.ToString()
+            });
 
             return selectList;
         }

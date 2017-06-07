@@ -11,6 +11,7 @@ namespace RollerTest.Domain.Abstract
     {
         IQueryable<RollerSampleInfo> RollerSampleInfos { get; }
         void SaveRollerSampleInfo(RollerSampleInfo rollersampleinfo);
+
         RollerSampleInfo DeleteRollerSampleInfo(int rollersampleinfoID);
     }
 }

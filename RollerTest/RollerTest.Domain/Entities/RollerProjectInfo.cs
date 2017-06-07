@@ -20,5 +20,7 @@ namespace RollerTest.Domain.Entities
         public string TestStandard { get; set; }
         public string TestDevice { get; set; }
         public string TestPerson { get; set; }
+
+        public virtual ICollection<RollerSampleInfo> RollerSampleInfo { get; set; }
     }
 }

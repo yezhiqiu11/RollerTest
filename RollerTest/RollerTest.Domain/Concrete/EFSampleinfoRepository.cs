@@ -49,12 +49,13 @@ namespace RollerTest.Domain.Concrete
                     dbEntry.SampleName = rollersampleinfo.SampleName;
                     dbEntry.SetValue = rollersampleinfo.SetValue;
                     dbEntry.RollerBaseStationID = rollersampleinfo.RollerBaseStationID;
-                    //dbEntry.RollerBaseStation = rollersampleinfo.RollerBaseStation;
                     dbEntry.UpLimit = rollersampleinfo.UpLimit;
                     dbEntry.DnLimit = rollersampleinfo.DnLimit;
                 }
             }
             context.SaveChanges();
         }
+
+
     }
 }

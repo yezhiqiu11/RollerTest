@@ -22,9 +22,9 @@ namespace RollerTest.Domain.Entities
         [HiddenInput(DisplayValue = false)]
         public bool State { get; set; }
         [HiddenInput(DisplayValue = false)]
-        public DateTime StartTime { get; set; }
+        public Nullable<DateTime> StartTime { get; set; }
         [HiddenInput(DisplayValue = false)]
-        public DateTime EndTime { get; set; }
+        public Nullable<DateTime> EndTime { get; set; }
 
 
         public virtual ICollection<RollerTestreportInfo> RollerTestreportInfo { get; set; }

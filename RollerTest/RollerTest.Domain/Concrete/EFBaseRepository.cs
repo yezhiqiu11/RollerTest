@@ -1,4 +1,5 @@
 ﻿using RollerTest.Domain.Abstract;
+using RollerTest.Domain.Context;
 using RollerTest.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace RollerTest.Domain.Concrete
 {
     public class EFBaseRepository:IBaseRepository
     {
-        private EFDbContext context = new EFDbContext();
+        private EFDbContext context = ContextControl.GetInstance().getContext();
         public IQueryable<RollerBaseLocation> RollerBaseLocations
         {
             get

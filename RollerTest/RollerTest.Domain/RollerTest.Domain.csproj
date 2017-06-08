@@ -93,6 +93,7 @@
     <Compile Include="Concrete\EFRecordinfoRepository.cs" />
     <Compile Include="Concrete\EFSampleinfoRepository.cs" />
     <Compile Include="Concrete\EFTestreportinfoRepository.cs" />
+    <Compile Include="Context\ContextControl.cs" />
     <Compile Include="Entities\MoterState.cs" />
     <Compile Include="Entities\ReadIniModel.cs" />
     <Compile Include="Entities\RollerBaseCondition.cs" />

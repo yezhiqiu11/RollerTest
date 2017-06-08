@@ -13,6 +13,9 @@ namespace RollerTest.Domain.Entities
         public int RollerBaseStationID { get; set; }
         public string Device { get; set; }
         public string Station { get; set; }
+        public bool State { get; set; }
+
+        public virtual ICollection<RollerSampleInfo> RollerSampleInfo { get; set; }
 
     }
 }

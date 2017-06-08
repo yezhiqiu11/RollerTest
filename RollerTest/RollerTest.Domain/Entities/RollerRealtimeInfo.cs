@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Mvc;
 
 namespace RollerTest.Domain.Entities
 {
@@ -14,9 +13,7 @@ namespace RollerTest.Domain.Entities
         [Key]
         public int RollerRealtimeInfoID { get; set; }
         [ForeignKey("RollerSampleInfo")]
-        [HiddenInput(DisplayValue = false)]
         public int RollerSampleInfoID { get; set; }
-        [HiddenInput(DisplayValue = false)]
         public virtual RollerSampleInfo RollerSampleInfo { get; set; }
         public DateTime CurrentTime { get; set; }
         public TimeSpan TotalTime { get; set; }

@@ -1,10 +1,8 @@
 ﻿using RollerTest.Domain.Abstract;
-using RollerTest.Domain.Context;
 using RollerTest.Domain.Entities;
 using RollerTest.WebUI.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -34,7 +32,7 @@ namespace RollerTest.WebUI.Controllers
             SampleViewModel sampleviewmodel = new SampleViewModel()
             {
                 rollerprojectinfo = projectrepo.RollerProjectInfos.FirstOrDefault(a => a.RollerProjectInfoID == RollerProjectInfoID),
-                rollersampleinfos = repository.RollerSampleInfos.Where(a => a.RollerProjectInfo.RollerProjectInfoID == RollerProjectInfoID).Include(x => x.RollerBaseStation)
+                rollersampleinfos = repository.RollerSampleInfos.Where(a => a.RollerProjectInfo.RollerProjectInfoID == RollerProjectInfoID)
             };
             return View(sampleviewmodel);
         }
@@ -42,7 +40,7 @@ namespace RollerTest.WebUI.Controllers
         {
             SettingViewModel settingviewModel = new SettingViewModel(baserepository);
             ViewData["StationList"] = settingviewModel.GetStationList(projectrepo.RollerProjectInfos.FirstOrDefault(a=>a.RollerProjectInfoID== RollerProjectInfoID).TestDevice);
-            return View("EditSample", new RollerSampleInfo() { RollerProjectInfoID= RollerProjectInfoID,State=false });
+            return View("EditSample", new RollerSampleInfo() { RollerProjectInfoID= RollerProjectInfoID,state=false });
         }
         [HttpPost]
         public ActionResult EditSample(RollerSampleInfo rollersampleinfo)

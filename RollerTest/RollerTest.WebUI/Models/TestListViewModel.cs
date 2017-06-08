@@ -9,6 +9,5 @@ namespace RollerTest.WebUI.Models
     public class TestListViewModel
     {
         public IEnumerable<RollerSampleInfo> rollersampleinfos { get; set; }
-
     }
 }

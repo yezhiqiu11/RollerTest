@@ -243,6 +243,7 @@
     <Compile Include="Models\ProjectListViewModel.cs" />
     <Compile Include="Models\SampleViewModel.cs" />
     <Compile Include="Models\SettingViewModel.cs" />
+    <Compile Include="Models\TestListViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Tools\DistinctExtensions.cs" />

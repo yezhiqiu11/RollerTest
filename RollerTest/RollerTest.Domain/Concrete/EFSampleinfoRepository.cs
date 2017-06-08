@@ -55,7 +55,5 @@ namespace RollerTest.Domain.Concrete
             }
             context.SaveChanges();
         }
-
-
     }
 }

@@ -1,48 +1,37 @@
-﻿using System;
+﻿using RollerTest.Domain.Abstract;
+using RollerTest.Domain.Entities;
+using RollerTest.WebUI.Models;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using RollerTest.Domain.Abstract;
-using RollerTest.WebUI.Models;
-using RollerTest.Domain.Entities;
 
 namespace RollerTest.WebUI.Controllers
 {
     public class TestBlockController : Controller
     {
-        private ISampleinfoRepository sampleinforepository;
-        public TestBlockController(ISampleinfoRepository samplerepo, IBaseRepository baserepo)
+        private ISampleinfoRepository samplerepo;
+        private IRealtimeinfoRepository realtimerepo;
+        public TestBlockController(ISampleinfoRepository repo, IRealtimeinfoRepository rtrepo)
         {
-            sampleinforepository = samplerepo;
+            samplerepo = repo;
+            realtimerepo = rtrepo;
         }
         // GET: TestBlock
         public ActionResult Index()
         {
-            return View();
-        }
-
-        public ActionResult BeforeTestInfo()
-        {
-
-            return View();
-        }
-
-        public ActionResult TestingInfo()
-        {       
-            ViewData["RollerSampleInfoID"] = sampleinforepository.RollerSampleInfos.Where(a => a.State == true).Select(a => new SelectListItem
+            TestListViewModel testlistviewModel = new TestListViewModel()
             {
-                Text = a.SampleID,
-                Value = a.SampleID.ToString()
-            });
-
-            return View("TestingInfoView", new RollerRecordInfo());
+                rollersampleinfos = samplerepo.RollerSampleInfos.Where(x => x.State == true).Include(x => x.RollerBaseStation).Include(x => x.RollerProjectInfo)
+            };
+            return View(testlistviewModel);
         }
-
-        public ActionResult AfterTestingInfo()
+        public PartialViewResult RealtimeAction(int RollerSampleInfoId)
         {
-            return View();
+            RollerRealtimeInfo rollerrealtimeInfo = realtimerepo.RollerRealtimeInfos.FirstOrDefault(x => x.RollerSampleInfoID == RollerSampleInfoId);
+            return PartialView(rollerrealtimeInfo);
         }
-
     }
 }

@@ -6,13 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using RollerTest.Domain.Entities;
 using RollerTest.Domain.Context;
+using System.Web.Mvc;
 
 namespace RollerTest.Domain.Concrete
 {
     public class EFSampleinfoRepository : ISampleinfoRepository
     {
         private EFDbContext context = ContextControl.GetInstance().getContext();
-
+        private IBaseRepository baserepo;
         public IQueryable<RollerSampleInfo> RollerSampleInfos
         {
             get
@@ -55,7 +56,7 @@ namespace RollerTest.Domain.Concrete
             }
             context.SaveChanges();
         }
-
+   
 
     }
 }

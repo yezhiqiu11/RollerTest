@@ -11,7 +11,11 @@ namespace RollerTest.WebUI.Controllers
 {
     public class TestBlockController : Controller
     {
-        private IBaseRepository baserepository;
+        private ISampleinfoRepository sampleinforepository;
+        public TestBlockController(ISampleinfoRepository samplerepo, IBaseRepository baserepo)
+        {
+            sampleinforepository = samplerepo;
+        }
         // GET: TestBlock
         public ActionResult Index()
         {
@@ -20,18 +24,19 @@ namespace RollerTest.WebUI.Controllers
 
         public ActionResult BeforeTestInfo()
         {
+
             return View();
         }
 
         public ActionResult TestingInfo()
-        {
-            SettingViewModel settingviewModel = new SettingViewModel(baserepository);
-            //ViewData["StandardList"] = settingviewModel.GetStandardList();
-            //ViewData["LocationList"] = settingviewModel.GetLocationList();
-            //ViewData["ConditionList"] = settingviewModel.GetConditionList();
-            //ViewData["DeviceList"] = settingviewModel.GetDeviceList();
-            ViewData["RollerSampleInfoID"] = settingviewModel.GetDeviceList();
-            return View("TestingInfoView", new RollerSampleInfo());
+        {       
+            ViewData["RollerSampleInfoID"] = sampleinforepository.RollerSampleInfos.Where(a => a.State == true).Select(a => new SelectListItem
+            {
+                Text = a.SampleID,
+                Value = a.SampleID.ToString()
+            });
+
+            return View("TestingInfoView", new RollerRecordInfo());
         }
 
         public ActionResult AfterTestingInfo()

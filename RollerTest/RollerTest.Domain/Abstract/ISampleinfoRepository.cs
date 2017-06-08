@@ -15,6 +15,5 @@ namespace RollerTest.Domain.Abstract
 
         RollerSampleInfo DeleteRollerSampleInfo(int rollersampleinfoID);
 
-        IEnumerable<SelectListItem> GetSampleTestingList()
     }
 }

@@ -1,4 +1,4 @@
-﻿@model RollerTest.Domain.Entities.RollerSampleInfo
+﻿@model RollerTest.Domain.Entities.RollerRecordInfo
 
 @{
     ViewBag.Title = "TestingInfoView";
@@ -9,15 +9,21 @@
         <div class="col-lg-12">
             <div class="row">
                 <div class="col-lg-12">
-                    <form method="post" class="form-horizontal" action="~/Project/EditProject">
+                    <form method="post" class="form-horizontal" action="~/TestBlock/Index">
+                        @Html.HiddenFor(x => x.RollerRecordInfoID)
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">委托单号</label>
+                            <label class="col-sm-2 control-label">样品编号</label>
                             <div class="col-sm-10">@Html.DropDownListFor(x => x.RollerSampleInfoID, ViewData["RollerSampleInfoID"] as IEnumerable<SelectListItem>, "--------------------------------------请选择-------------------------------------")</div>
                         </div>
                         <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">样品状态信息</label>
+
+                            <div class="col-sm-9">@Html.EditorFor(x => x.RecordInfo)</div>
+                        </div>
                         <div class="col-lg-offset-5">
                             <input class="btn btn-primary" type="submit" value="提交" />
-                            @*@Html.ActionLink("返回", "Index", "Sample")*@
+                            @*Html.ActionLink("返回", "Index", "Sample")*@
                         </div>
                     </form>
                 </div>

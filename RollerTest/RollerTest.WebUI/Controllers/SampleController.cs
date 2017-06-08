@@ -42,7 +42,7 @@ namespace RollerTest.WebUI.Controllers
         {
             SettingViewModel settingviewModel = new SettingViewModel(baserepository);
             ViewData["StationList"] = settingviewModel.GetStationList(projectrepo.RollerProjectInfos.FirstOrDefault(a=>a.RollerProjectInfoID== RollerProjectInfoID).TestDevice);
-            return View("EditSample", new RollerSampleInfo() { RollerProjectInfoID= RollerProjectInfoID,State=false });
+            return View("EditSample", new RollerSampleInfo() { RollerProjectInfoID = RollerProjectInfoID, State = true });
         }
         [HttpPost]
         public ActionResult EditSample(RollerSampleInfo rollersampleinfo)

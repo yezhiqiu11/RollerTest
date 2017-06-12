@@ -1699,6 +1699,7 @@
     <Content Include="Views\RollerBaseStations\Edit.cshtml" />
     <Content Include="Views\RollerBaseStations\Index.cshtml" />
     <Content Include="Views\TestBlock\RealtimeAction.cshtml" />
+    <Content Include="Views\TestBlock\TestingSampleInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RollerTest.Domain\RollerTest.Domain.csproj">

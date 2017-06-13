@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RollerTest.Domain.IniFiles
+namespace RollerTest.WebUI.IniFiles
 {
     public class Profile
     {

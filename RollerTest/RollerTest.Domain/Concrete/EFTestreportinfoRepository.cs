@@ -12,6 +12,8 @@ namespace RollerTest.Domain.Concrete
     public class EFTestreportinfoRepository : ITestreportinfoRepository
     {
         private EFDbContext context = ContextControl.GetInstance().getContext();
+        //private EFDbContext context = new EFDbContext();
+
         public IQueryable<RollerTestreportInfo> RollerTestreportInfos
         {
             get

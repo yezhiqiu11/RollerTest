@@ -7,7 +7,7 @@
 <div class="wrapper wrapper-content">
     <div class="row">
         <div class="col-lg-3">
-            @{ Html.RenderAction("ProjectMenu", "Project");}
+            @{ Html.RenderPartial("ProjectMenu",Model.projectlistviewmodel);}
         </div>
         <div class="col-lg-9 animated fadeInRight">
 

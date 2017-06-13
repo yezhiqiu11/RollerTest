@@ -26,5 +26,11 @@ namespace RollerTest.WebUI.Controllers
 
             return View();
         }
+        public ActionResult Chat()
+        {
+            return View();
+        }
+
+
     }
 }

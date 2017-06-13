@@ -52,15 +52,6 @@ namespace RollerTest.WebUI.Controllers
             ViewData["DeviceList"] = settingviewModel.GetDeviceList();
             return View("EditProject", new RollerProjectInfo());
         }
-        public PartialViewResult ProjectMenu()
-        {
-            ProjectListViewModel projectlistviewModel = new ProjectListViewModel()
-            {
-                rollerprojectinfos = projectrepository.RollerProjectInfos
-            };
-            return PartialView(projectlistviewModel);
-        }
-        // GET: Project
         public ActionResult Index()
         {
             return View();

@@ -1,4 +1,6 @@
-﻿
+﻿@model RollerTest.WebUI.Models.ProjectListViewModel
+
+
 @{
     ViewBag.Title = "Inbox";
 }
@@ -6,7 +8,7 @@
 <div class="wrapper wrapper-content">
     <div class="row">
         <div class="col-lg-3">
-            @{ Html.RenderAction("ProjectMenu", "Project");}
+            @{ Html.RenderPartial("ProjectMenu",Model);}
         </div>
         <div class="col-lg-9 animated fadeInRight">
 
@@ -15,7 +17,7 @@
                     <p>点击项目名，编写项目内容。</p>
                 </div>
             </div>
-        
+
         </div>
     </div>
 </div>
@@ -23,22 +25,5 @@
 
 
 
-@section Styles {
-    @Styles.Render("~/Content/plugins/iCheck/iCheckStyles")
-}
 
-@section Scripts {
-    @Scripts.Render("~/plugins/iCheck")
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green',
-            });
-
-        });
-    </script>
-}
 

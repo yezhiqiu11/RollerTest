@@ -1,7 +1,7 @@
 ﻿using RollerTest.Domain.Abstract;
 using RollerTest.Domain.Concrete;
 using RollerTest.Domain.Entities;
-using RollerTest.Domain.IniFiles;
+using RollerTest.WebUI.IniFiles;
 using RollerTest.WebUI.ExternalProgram;
 using RollerTest.WebUI.Models;
 using System;
@@ -20,6 +20,7 @@ namespace RollerTest.WebUI.Controllers
             IniFileControl inifileControl = IniFileControl.GetInstance();
             CdioControl cdioControl = CdioControl.GetInstance();
             ViewData["FileTimerState"] = inifileControl.TimerState()==false?"关闭":"开启";
+            ViewData["TimerTimerState"] = inifileControl.Timer2State() == false ? "关闭" : "开启";
             if (cdioControl.InitMoto().Equals("Success"))
             {
                 ViewData["CdioInitState"] = "成功";
@@ -60,5 +61,19 @@ namespace RollerTest.WebUI.Controllers
             cdioControl.CloseTimer();
             Response.Redirect("/ControlBlock/Index");
         }
+        public void TimerOpenTimer()
+        {
+            IniFileControl inifileControl = IniFileControl.GetInstance();
+            inifileControl.OpenTimer2();
+            Response.Redirect("/ControlBlock/Index");
+        }
+        public void TimerCloseTimer()
+        {
+            IniFileControl inifileControl = IniFileControl.GetInstance();
+            inifileControl.CloseTimer2();
+            Response.Redirect("/ControlBlock/Index");
+        }
+
+
     }
 }

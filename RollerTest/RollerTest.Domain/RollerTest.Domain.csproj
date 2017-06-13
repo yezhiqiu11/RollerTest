@@ -106,10 +106,8 @@
     <Compile Include="Entities\RollerSampleInfo.cs" />
     <Compile Include="Entities\RollerTestreportInfo.cs" />
     <Compile Include="Entities\RollerTime.cs" />
-    <Compile Include="IniFiles\IniFile.cs" />
-    <Compile Include="IniFiles\IniFileControl.cs" />
-    <Compile Include="IniFiles\Profile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SeedDb\DbInitializer.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

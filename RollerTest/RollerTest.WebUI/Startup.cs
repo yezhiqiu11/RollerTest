@@ -17,6 +17,7 @@ namespace RollerTest.WebUI
             app.UseHangfireServer();
             EFDbContext context = new EFDbContext();
             context.Database.CreateIfNotExists();
+            app.MapSignalR();
         }
     }
 }

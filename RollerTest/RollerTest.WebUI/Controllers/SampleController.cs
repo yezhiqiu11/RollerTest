@@ -26,15 +26,20 @@ namespace RollerTest.WebUI.Controllers
         // GET: Project
         public ActionResult Index()
         {
+            ProjectListViewModel projectlistviewModel = new ProjectListViewModel()
+            {
+                rollerprojectinfos = projectrepo.RollerProjectInfos
+            };
             
-            return View();
+            return View(projectlistviewModel);
         }
         public ActionResult ViewInfo(int RollerProjectInfoID)
         {
             SampleViewModel sampleviewmodel = new SampleViewModel()
             {
                 rollerprojectinfo = projectrepo.RollerProjectInfos.FirstOrDefault(a => a.RollerProjectInfoID == RollerProjectInfoID),
-                rollersampleinfos = repository.RollerSampleInfos.Where(a => a.RollerProjectInfo.RollerProjectInfoID == RollerProjectInfoID).Include(x => x.RollerBaseStation)
+                rollersampleinfos = repository.RollerSampleInfos.Where(a => a.RollerProjectInfo.RollerProjectInfoID == RollerProjectInfoID).Include(x => x.RollerBaseStation),
+                 projectlistviewmodel = new ProjectListViewModel() { rollerprojectinfos = projectrepo.RollerProjectInfos }
             };
             return View(sampleviewmodel);
         }
@@ -66,6 +71,7 @@ namespace RollerTest.WebUI.Controllers
             repository.DeleteRollerSampleInfo(RollerSampleInfoID);
             return RedirectToAction("ViewInfo", new { RollerProjectInfoID = RollerProjectInfoId });
         }
+
 
     }
 }

@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using RollerTest.WebUI.Infrastructure;
+using System.Data.Entity;
+using RollerTest.Domain.SeedDb;
 
 namespace RollerTest.WebUI
 {
@@ -13,6 +15,8 @@ namespace RollerTest.WebUI
     {
         protected void Application_Start()
         {
+            Database.SetInitializer(new DbInitializer());
+
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

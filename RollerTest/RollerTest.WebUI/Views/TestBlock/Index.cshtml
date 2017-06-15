@@ -160,7 +160,9 @@
                                                         <strong>王 欢</strong> 提示 <br>
                                                         <small class="text-muted">点击填写试验前及试验后状态判断。</small>
                                                         <div class="pull-right">
-                                                            <a href="#"><input type="button" class="btn btn-xs btn-white fa fa-thumbs-up" value="样品判断" /></a>
+                                                            @*<a href="#"><input type="button" class="btn btn-xs btn-white fa fa-thumbs-up" value="样品判断" /></a>*@
+                                                            @*@Html.ActionLink("样品判断", "SampleDecide", new { Controller = "TestBlock", RollerSampleInfoID= p.RollerSampleInfoID }, new { @class = "btn btn-white btn-sm" })*@
+                                                            @Html.ActionLink("样品判断", "SampleDecide", new {Controller="SampleDecide", RollerSampleInfoID=p.RollerSampleInfoID }, new { @class = "btn btn-white btn-sm" })
                                                         </div>
                                                     </div>
                                                 </div>

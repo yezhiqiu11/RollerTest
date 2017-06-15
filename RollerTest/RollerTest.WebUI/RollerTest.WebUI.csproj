@@ -225,6 +225,7 @@
     <Compile Include="Controllers\RollerBaseConditionsController.cs" />
     <Compile Include="Controllers\RollerBaseLocationsController.cs" />
     <Compile Include="Controllers\RollerBaseStandardsController.cs" />
+    <Compile Include="Controllers\SampleDecideController.cs" />
     <Compile Include="Controllers\TestBlockController.cs" />
     <Compile Include="ExternalProgram\CdioControl.cs" />
     <Compile Include="ExternalProgram\CdioCs.cs" />
@@ -241,6 +242,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ProjectListViewModel.cs" />
+    <Compile Include="Models\SampleDecideViewModel.cs" />
     <Compile Include="Models\SampleViewModel.cs" />
     <Compile Include="Models\SettingViewModel.cs" />
     <Compile Include="Models\TestListViewModel.cs" />
@@ -1701,6 +1703,7 @@
     <Content Include="Views\RollerBaseStations\Edit.cshtml" />
     <Content Include="Views\RollerBaseStations\Index.cshtml" />
     <Content Include="Views\TestBlock\RealtimeAction.cshtml" />
+    <Content Include="Views\SampleDecide\SampleDecide.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RollerTest.Domain\RollerTest.Domain.csproj">

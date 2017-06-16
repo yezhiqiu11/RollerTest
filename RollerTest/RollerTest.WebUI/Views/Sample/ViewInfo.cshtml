@@ -39,9 +39,9 @@
                         <div class="ibox-content">
                             <div class="form-horizontal">
                                 <div class="form-group">
-                                    <label class="col-lg-1 control-label">基本信息</label>
+                                    <label class="col-lg-2 control-label">基本信息</label>
 
-                                    <div class="col-lg-11">
+                                    <div class="col-lg-10">
                                         <div class="row">
                                             <div class="col-lg-4"><input type="text" class="form-control" id="Commission" value="委托单号：@Model.rollerprojectinfo.Commission" readonly></div>
                                             <div class="col-lg-4"><input type="text" class="form-control" id="TestName" value="试验名称：@Model.rollerprojectinfo.TestName" readonly></div>
@@ -61,8 +61,8 @@
                                 </div>
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group">
-                                    <label class="col-lg-1 control-label">样品信息</label>
-                                    <div class="container col-lg-11">
+                                    <label class="col-lg-2 control-label">样品信息</label>
+                                    <div class="container col-lg-10">
                                         <table class="table table-bordered">
                                             <thead>
                                                 <tr>
@@ -108,7 +108,7 @@
                                 <div class="form-group">
                                     <div class="col-lg-4">
                                         @*<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">增加样品</button>*@
-                                        @Html.ActionLink("增加样品", "CreateSample", new { Controller = "Sample", RollerProjectInfoID = Model.rollerprojectinfo.RollerProjectInfoID },new { @class="col-lg-offset-1 col-lg-3 btn btn-primary"})
+                                        @Html.ActionLink("增加样品", "CreateSample", new { Controller = "Sample", RollerProjectInfoID = Model.rollerprojectinfo.RollerProjectInfoID })
                                     </div>
                                 </div>
                             </div>

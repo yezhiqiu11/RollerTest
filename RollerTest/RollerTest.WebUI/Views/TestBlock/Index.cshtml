@@ -105,7 +105,7 @@
                                             <div class="feed-element">
                                                 <div class="media-body">
                                                     <small>Force</small>
-                                                    <h1 class="no-margins">106,120N</h1>
+                                                    <h1 id="data-@p.RollerBaseStation.Station" class="no-margins"></h1>
                                                     </div>
                                                 </div>
                                         </div>
@@ -161,6 +161,7 @@
     <script>
         $(function () {
             var time = $.connection.timeHub;
+            var data = $.connection.dataHub;
             time.client.addNewTimeToPage = function (station, time) {
                 x1 = document.getElementById("time-1#");
                 x2 = document.getElementById("time-2#");
@@ -175,7 +176,7 @@
                 x11 = document.getElementById("time-11#");
                 x12 = document.getElementById("time-12#");
                 switch (station) {
-                    case "1#": x1.innerHTML = time; break;
+                    case "1#": x1.innerHTML =time; break;
                     case "2#": x2.innerHTML = time; break;
                     case "3#": x3.innerHTML = time; break;
                     case "4#": x4.innerHTML = time; break;
@@ -189,13 +190,43 @@
                     case "12#": x12.innerHTML = time; break;
                 }
             }
+            data.client.addNewDataToPage = function (station, data) {
+                y1 = document.getElementById("data-1#");
+                y2 = document.getElementById("data-2#");
+                y3 = document.getElementById("data-3#");
+                y4 = document.getElementById("data-4#");
+                y5 = document.getElementById("data-5#");
+                y6 = document.getElementById("data-6#");
+                y7 = document.getElementById("data-7#");
+                y8 = document.getElementById("data-8#");
+                y9 = document.getElementById("data-9#");
+                y10 = document.getElementById("data-10#");
+                y11 = document.getElementById("data-11#");
+                y12 = document.getElementById("data-12#");
+
+                switch (station) {
+                    case "AI1-1-01": y1.innerHTML = data+"N"; break;
+                    case "AI1-1-02": y2.innerHTML = data + "N"; break;
+                    case "AI1-1-03": y3.innerHTML = data + "N"; break;
+                    case "AI1-1-04": y4.innerHTML = data + "N"; break;
+                    case "AI1-1-05": y5.innerHTML = data + "N"; break;
+                    case "AI1-1-06": y6.innerHTML = data + "N"; break;
+                    case "AI1-1-07": y7.innerHTML = data + "N"; break;
+                    case "AI1-1-08": y8.innerHTML = data + "N"; break;
+                    case "AI1-1-09": y9.innerHTML = data + "N"; break;
+                    case "AI1-1-10": y10.innerHTML = data + "N"; break;
+                    case "AI1-1-11": y11.innerHTML = data + "N"; break;
+                    case "AI1-1-12": y12.innerHTML = data + "N"; break;
+
+                }
+            }
             $.connection.hub.start().done();
 
 
         })
 
     </script>
-    
-    
-    
-    }
+
+
+
+}

@@ -68,6 +68,10 @@ namespace RollerTest.WebUI.ExternalProgram
         {
             return controlTimer.Enabled;
         }
+        public MoterState getMotoState()
+        {
+            return this.moterState;
+        }
         public void OpenTimer()
         {
             controlTimer.Enabled = true;
@@ -76,5 +80,21 @@ namespace RollerTest.WebUI.ExternalProgram
         {
             controlTimer.Enabled = false;
         }
+        public void setMotoRunning()
+        {
+            this.moterState.MotoREV = 0;
+            this.moterState.IsMotoRunning = true;
+        }
+        public void setMotoStopping()
+        {
+            this.moterState.IsMotoRunning = false;
+        }
+        public void setMotoRunningREV()
+        {
+            this.moterState.MotoREV = 1;
+            this.moterState.IsMotoRunning = true;
+
+        }
+
     }
 }

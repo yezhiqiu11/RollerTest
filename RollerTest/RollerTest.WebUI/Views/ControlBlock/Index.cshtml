@@ -22,250 +22,133 @@
     </div>
 </div>
 <div class="row wrapper wrapper-content animated fadeInRight">
-    <div class="col-lg-6">
-        <div class="ibox float-e-margins">
+    <div class="col-lg-4">
+        <div class="col-lg-12 ibox float-e-margins">
             <div class="ibox-title">
-                <h5>读写控制</h5>
-                <div class="ibox-tools">
-                    <a class="collapse-link">
-                        <i class="fa fa-chevron-up"></i>
-                    </a>
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-wrench"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li>
-                            <a href="#">Config option 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Config option 2</a>
-                        </li>
-                    </ul>
-                    <a class="close-link">
-                        <i class="fa fa-times"></i>
-                    </a>
-                </div>
+                <h5>写入与计时服务</h5>
             </div>
             <div class="ibox-content">
                 <div>
-                    <p><strong>后台数据</strong></p>
-                    <p>
-                        <div class="col-lg-6">
-                            <ul class="list-group clear-list m-t">
-                                <li class="list-group-item fist-item">
-                                    <span id="time-1#" class="pull-right">
-                                    </span>
-                                    <span class="pull-right">
-                                        后台:@Model.readiniModel.TestTime1&nbsp;
-                                    </span>
-                                    <span class="label label-success">1</span> 1#试验滚轮
-                                </li>
-                                <li class="list-group-item">
-                                    <span id="time-2#" class="pull-right">
-                                    </span>
-                                    <span class="pull-right">
-                                        后台:@Model.readiniModel.TestTime2&nbsp;
-                                    </span>
-                                    <span class="label label-info">2</span> 2#试验滚轮
-                                </li>
-                                <li class="list-group-item">
-                                    <span id="time-3#" class="pull-right">
-                                    </span>
-                                    <span class="pull-right">
-                                        后台:@Model.readiniModel.TestTime3&nbsp;
-                                    </span>
-                                    <span class="label label-primary">3</span> 3#试验滚轮
-                                </li>
-                                <li class="list-group-item">
-                                    <span id="time-4#" class="pull-right">
-                                    </span>
-                                    <span class="pull-right">
-                                        后台:@Model.readiniModel.TestTime4&nbsp;
-                                    </span>
-                                    <span class="label label-default">4</span> 4#试验滚轮
-                                </li>
-                                <li class="list-group-item">
-                                    <span id="time-5#" class="pull-right">
-                                    </span>
-                                    <span class="pull-right">
-                                        后台:@Model.readiniModel.TestTime5&nbsp;
-                                    </span>
-                                    <span class="label label-primary">5</span> 5#试验滚轮
-                                </li>
-                                <li class="list-group-item">
-                                    <span id="time-6#" class="pull-right">
-                                    </span>
-                                    <span class="pull-right">
-                                        后台:@Model.readiniModel.TestTime6&nbsp;
-                                    </span>
-                                    <span class="label label-info">6</span> 6#试验滚轮
-                                </li>
-                            </ul>
+                    <div class="feed-activity-list">
+                        <div class="feed-element">
+                            <div class="media-body ">
+                                <strong>写入状态：</strong> @ViewData["FileTimerState"]
+                                <div class="pull-right">
+                                    <a href="~/ControlBlock/FileOpenTimer"><input type="button" class="btn btn-xs btn-white fa fa-thumbs-up" value="开启" /></a>
+                                    <a href="~/ControlBlock/FileCloseTimer"><input type="button" class="btn btn-xs btn-white fa fa-thumbs-up" value="关闭" /></a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-lg-6">
-                            <ul class="list-group clear-list m-t">
-                                <li class="list-group-item fist-item">
-                                    <span id="time-7#" class="pull-right">
-                                    </span>
-                                    <span class="pull-right">
-                                        后台:@Model.readiniModel.TestTime7&nbsp;
-                                    </span>
-                                    <span class="label label-success">7</span> 7#试验滚轮
-                                </li>
-                                <li class="list-group-item">
-                                    <span id="time-8#" class="pull-right">
-                                    </span>
-                                    <span class="pull-right">
-                                        后台:@Model.readiniModel.TestTime8&nbsp;
-                                    </span>
-                                    <span class="label label-info">8</span> 8#试验滚轮
-                                </li>
-                                <li class="list-group-item">
-                                    <span id="time-9#" class="pull-right">
-                                    </span>
-                                    <span class="pull-right">
-                                        后台:@Model.readiniModel.TestTime9&nbsp;
-                                    </span>
-                                    <span class="label label-primary">9</span> 9#试验滚轮
-                                </li>
-                                <li class="list-group-item">
-                                    <span id="time-10#" class="pull-right">
-                                    </span>
-                                    <span class="pull-right">
-                                        后台:@Model.readiniModel.TestTime10&nbsp;
-                                    </span>
-                                    <span class="label label-default">A</span> 10#试验滚轮
-                                </li>
-                                <li class="list-group-item">
-                                    <span id="time-11#" class="pull-right">
-                                    </span>
-                                    <span class="pull-right">
-                                        后台:@Model.readiniModel.TestTime11&nbsp;
-                                    </span>
-                                    <span class="label label-primary">B</span> 11#试验滚轮
-                                </li>
-                                <li class="list-group-item">
-                                    <span id="time-12#" class="pull-right">
-                                    </span>
-                                    <span class="pull-right">
-                                        后台:@Model.readiniModel.TestTime12&nbsp;
-                                    </span>
-                                    <span class="label label-info">C</span> 12#试验滚轮
-                                </li>
-                            </ul>
-                        </div>
-                    </p>
-                </div>
-                <div>
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <h5>写入与计时服务</h5>
-                        </div>
-                        <div class="ibox-content">
-                            <div>
-                                <div class="feed-activity-list">
-                                    <div class="feed-element">
-                                        <div class="media-body ">
-                                            <strong>写入状态:</strong> @ViewData["FileTimerState"]<br>
-                                            <small class="text-muted">开启后，将向服务器写入累计时间。</small>
-                                            <div class="pull-right">
-                                                <a href="~/ControlBlock/FileOpenTimer"><input type="button" class="btn btn-xs btn-white fa fa-thumbs-up" value="开启" /></a>
-                                                <a href="~/ControlBlock/FileCloseTimer"><input type="button" class="btn btn-xs btn-white fa fa-thumbs-up" value="关闭" /></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="feed-element">
-                                        <div class="media-body ">
-                                            <strong>计时状态：</strong> @ViewData["TimerTimerState"] <br>
-                                            <small class="text-muted">开启后，累计时间计时服务将开启。</small>
-                                            <div class="pull-right">
-                                                <a href="~/ControlBlock/TimerOpenTimer"><input type="button" class="btn btn-xs btn-white fa fa-thumbs-up" value="开启" /></a>
-                                                <a href="~/ControlBlock/TimerCloseTimer"><input type="button" class="btn btn-xs btn-white fa fa-thumbs-up" value="关闭" /></a>
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="feed-element">
+                            <div class="media-body ">
+                                <strong>计时状态：</strong> @ViewData["TimerTimerState"] 
+                                <div class="pull-right">
+                                    <a href="~/ControlBlock/TimerOpenTimer"><input type="button" class="btn btn-xs btn-white fa fa-thumbs-up" value="开启" /></a>
+                                    <a href="~/ControlBlock/TimerCloseTimer"><input type="button" class="btn btn-xs btn-white fa fa-thumbs-up" value="关闭" /></a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>                                     
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>电机控制服务</h5>
+                <span class="label label-primary pull-right">@ViewData["CdioInitState"]</span>
+            </div>
+            <div class="ibox-content">
+                <div>
+                    <div class="feed-activity-list">
+                        <div class="feed-element">
+                            <div class="media-body ">
+                                <strong>监视状态：</strong> @ViewData["CdioTimerState"]<br>
+                                <small class="text-muted">点击开启后，实时监控电机状态。</small>
+                                <div class="pull-right">
+                                    <a href="~/ControlBlock/CdioOpenTimer"><input type="button" class="btn btn-xs btn-white fa fa-thumbs-up" value="开启" /></a>
+                                    <a href="~/ControlBlock/CdioCloseTimer"><input type="button" class="btn btn-xs btn-white fa fa-thumbs-up" value="关闭" /></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="feed-element">
+                            <div class="media-body ">
+                                <strong>操作提示</strong>
+                                <small class="text-muted">点击控制电机运行状态</small>
+                                <div class="pull-right">
+                                    <a href="~/ControlBlock/MotoRunning"><input type="button" class="btn btn-xs btn-white fa fa-thumbs-up" value="正转" /></a>
+                                    <a href="~/ControlBlock/MotoRunningREV"><input type="button" class="btn btn-xs btn-white fa fa-thumbs-up" value="反转" /></a>
+                                    <a href="~/ControlBlock/MotoStopping"><input type="button" class="btn btn-xs btn-white fa fa-thumbs-up" value="停止" /></a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>应力控制服务</h5>
+                <span class="label label-primary pull-right">@ViewData["DealState"]</span>
+            </div>
+            <div class="ibox-content">
+                <div>
+                    <div class="feed-activity-list">
+                        <div class="feed-element">
+                            <div class="media-body ">
+                                <strong>操作提示</strong>
+                                <small class="text-muted">点击控制应力采集状态</small>
+                                <div class="pull-right">
+                                    <a href="~/ControlBlock/ConnectDeal"><input type="button" class="btn btn-xs btn-white fa fa-thumbs-up" value="连接" /></a>
+                                    <a href="~/ControlBlock/CancelDeal"><input type="button" class="btn btn-xs btn-white fa fa-thumbs-up" value="断开" /></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="col-lg-6">
+    <div class="col-lg-8">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>电机控制</h5>
-                <div class="ibox-tools">
-                    <a class="collapse-link">
-                        <i class="fa fa-chevron-up"></i>
-                    </a>
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-wrench"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li>
-                            <a href="#">Config option 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Config option 2</a>
-                        </li>
-                    </ul>
-                    <a class="close-link">
-                        <i class="fa fa-times"></i>
-                    </a>
-                </div>
+                <h5>资源数据</h5>
             </div>
             <div class="ibox-content">
-                <div
-                     
-                     >
-                    <div class="ibox-title">
-                        <h5>初始化状态:</h5>
-                        <div class="ibox-tools">
-                            <span class="label label-info">@ViewData["CdioInitState"]</span>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <h5>监视状态:</h5>
-                            <div class="ibox-tools">
-                                <span class="label label-warning-light">@ViewData["CdioTimerState"]</span>
-                            </div>
-                        </div>
-                        <div class="ibox-content">
-                            <div>
-                                <div class="feed-activity-list">
-                                    <div class="feed-element">
-                                        <div class="media-body ">
-                                            <strong>王 欢</strong> 提示 <br>
-                                            <small class="text-muted">点击开启后，将开启后台任务，实施监控电机状态。</small>
-                                            <div class="pull-right">
-                                                <a href="~/ControlBlock/CdioOpenTimer"><input type="button" class="btn btn-xs btn-white fa fa-thumbs-up" value="开启" /></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="feed-element">
-                                        <div class="media-body ">
-                                            <strong>王 欢</strong> 提示 <br>
-                                            <small class="text-muted">点击关闭后，将关闭后台任务，停止实施监控电机状态。</small>
-                                            <div class="pull-right">
-                                                <a href="~/ControlBlock/CdioCloseTimer"><input type="button" class="btn btn-xs btn-white fa fa-thumbs-up" value="关闭" /></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <td align="center">编号</td>
+                            <td align="center">工位</td>
+                            <td align="center">后台计时</td>
+                            <td align="center">实时计时</td>
+                            <td align="center">实时应力</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td width="10%">1</td><td width="15%">1#工位</td><td width="25%">@Model.readiniModel.TestTime1</td><td width="25%" id="time-1#"></td><td width="25%" id="data-1#"></td></tr>
+                        <tr><td width="10%">2</td><td width="15%">2#工位</td><td width="25%">@Model.readiniModel.TestTime2</td><td width="25%" id="time-2#"></td><td width="25%" id="data-2#"></td></tr>
+                        <tr><td width="10%">3</td><td width="15%">3#工位</td><td width="25%">@Model.readiniModel.TestTime3</td><td width="25%" id="time-3#"></td><td width="25%" id="data-3#"></td></tr>
+                        <tr><td width="10%">4</td><td width="15%">4#工位</td><td width="25%">@Model.readiniModel.TestTime4</td><td width="25%" id="time-4#"></td><td width="25%" id="data-4#"></td></tr>
+                        <tr><td width="10%">5</td><td width="15%">5#工位</td><td width="25%">@Model.readiniModel.TestTime5</td><td width="25%" id="time-5#"></td><td width="25%" id="data-5#"></td></tr>
+                        <tr><td width="10%">6</td><td width="15%">6#工位</td><td width="25%">@Model.readiniModel.TestTime6</td><td width="25%" id="time-6#"></td><td width="25%" id="data-6#"></td></tr>
+                        <tr><td width="10%">7</td><td width="15%">7#工位</td><td width="25%">@Model.readiniModel.TestTime7</td><td width="25%" id="time-7#"></td><td width="25%" id="data-7#"></td></tr>
+                        <tr><td width="10%">8</td><td width="15%">8#工位</td><td width="25%">@Model.readiniModel.TestTime8</td><td width="25%" id="time-8#"></td><td width="25%" id="data-8#"></td></tr>
+                        <tr><td width="10%">9</td><td width="15%">9#工位</td><td width="25%">@Model.readiniModel.TestTime9</td><td width="25%" id="time-9#"></td><td width="25%" id="data-9#"></td></tr>
+                        <tr><td width="10%">10</td><td width="15%">10#工位</td><td width="25%">@Model.readiniModel.TestTime10</td><td width="25%" id="time-10#"></td><td width="25%" id="data-10#"></td></tr>
+                        <tr><td width="10%">11</td><td width="15%">11#工位</td><td width="25%">@Model.readiniModel.TestTime11</td><td width="25%" id="time-11#"></td><td width="25%" id="data-11#"></td></tr>
+                        <tr><td width="10%">12</td><td width="15%">12#工位</td><td width="25%">@Model.readiniModel.TestTime12</td><td width="25%" id="time-12#"></td><td width="25%" id="data-12#"></td></tr>
+                    </tbody>
+                </table>
             </div>
         </div>
+
     </div>
-</div>
+
+ </div>
+
+
 
 @section scripts{
     <script src="~/Scripts/jquery.signalR-2.2.2.js"></script>
@@ -273,6 +156,7 @@
     <script>
         $(function () {
             var time = $.connection.timeHub;
+            var data = $.connection.dataHub;
             time.client.addNewTimeToPage = function (station, time) {
                 x1 = document.getElementById("time-1#");
                 x2 = document.getElementById("time-2#");
@@ -287,18 +171,48 @@
                 x11 = document.getElementById("time-11#");
                 x12 = document.getElementById("time-12#");
                 switch (station) {
-                    case "1#": x1.innerHTML ="计时:"+time; break;
-                    case "2#": x2.innerHTML = "计时:" + time; break;
-                    case "3#": x3.innerHTML = "计时:" + time; break;
-                    case "4#": x4.innerHTML = "计时:" + time; break;
-                    case "5#": x5.innerHTML = "计时:" + time; break;
-                    case "6#": x6.innerHTML = "计时:" + time; break;
-                    case "7#": x7.innerHTML = "计时:" + time; break;
-                    case "8#": x8.innerHTML = "计时:" + time; break;
-                    case "9#": x9.innerHTML = "计时:" + time; break;
-                    case "10#": x10.innerHTML = "计时:" + time; break;
-                    case "11#": x11.innerHTML = "计时:" + time; break;
-                    case "12#": x12.innerHTML = "计时:" + time; break;
+                    case "1#": x1.innerHTML =time; break;
+                    case "2#": x2.innerHTML = time; break;
+                    case "3#": x3.innerHTML = time; break;
+                    case "4#": x4.innerHTML = time; break;
+                    case "5#": x5.innerHTML = time; break;
+                    case "6#": x6.innerHTML = time; break;
+                    case "7#": x7.innerHTML = time; break;
+                    case "8#": x8.innerHTML = time; break;
+                    case "9#": x9.innerHTML = time; break;
+                    case "10#": x10.innerHTML = time; break;
+                    case "11#": x11.innerHTML = time; break;
+                    case "12#": x12.innerHTML = time; break;
+                }
+            }
+            data.client.addNewDataToPage = function (station, data) {
+                y1 = document.getElementById("data-1#");
+                y2 = document.getElementById("data-2#");
+                y3 = document.getElementById("data-3#");
+                y4 = document.getElementById("data-4#");
+                y5 = document.getElementById("data-5#");
+                y6 = document.getElementById("data-6#");
+                y7 = document.getElementById("data-7#");
+                y8 = document.getElementById("data-8#");
+                y9 = document.getElementById("data-9#");
+                y10 = document.getElementById("data-10#");
+                y11 = document.getElementById("data-11#");
+                y12 = document.getElementById("data-12#");
+
+                switch (station) {
+                    case "AI1-1-01": y1.innerHTML = data+"N"; break;
+                    case "AI1-1-02": y2.innerHTML = data + "N"; break;
+                    case "AI1-1-03": y3.innerHTML = data + "N"; break;
+                    case "AI1-1-04": y4.innerHTML = data + "N"; break;
+                    case "AI1-1-05": y5.innerHTML = data + "N"; break;
+                    case "AI1-1-06": y6.innerHTML = data + "N"; break;
+                    case "AI1-1-07": y7.innerHTML = data + "N"; break;
+                    case "AI1-1-08": y8.innerHTML = data + "N"; break;
+                    case "AI1-1-09": y9.innerHTML = data + "N"; break;
+                    case "AI1-1-10": y10.innerHTML = data + "N"; break;
+                    case "AI1-1-11": y11.innerHTML = data + "N"; break;
+                    case "AI1-1-12": y12.innerHTML = data + "N"; break;
+
                 }
             }
             $.connection.hub.start().done();

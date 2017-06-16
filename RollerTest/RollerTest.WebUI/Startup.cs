@@ -12,9 +12,9 @@ namespace RollerTest.WebUI
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-            GlobalConfiguration.Configuration.UseSqlServerStorage("Data Source=EIS-1206\\SQLEXPRESS;Initial Catalog=HangfireDemo;User ID=sa;Password=198959");
-            app.UseHangfireDashboard();
-            app.UseHangfireServer();
+            //GlobalConfiguration.Configuration.UseSqlServerStorage("Data Source=SMEC-PC\\SQLEXPRESS;Initial Catalog=HangfireDemo;User ID=sa;Password=198959");
+            //app.UseHangfireDashboard();
+            //app.UseHangfireServer();
             EFDbContext context = new EFDbContext();
             context.Database.CreateIfNotExists();
             app.MapSignalR();

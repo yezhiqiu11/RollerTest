@@ -1,39 +1,94 @@
-﻿using System;
+﻿using Microsoft.AspNet.SignalR;
+using RollerTest.WebUI.IniFiles;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using System.Net.Sockets;
-using System.Windows.Threading;
 using System.Net;
+using System.Net.Sockets;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.WebPages;
+using System.Windows.Threading;
 
 namespace RollerTest.WebUI.ExternalProgram
 {
-    public class DealMethod
+    public class DealControl
     {
-        object m_lock = new object();
-        const int ReceiveDataCount = 4048;
-        const int PacketHeadSize = 12;
-        int nNetPos = 0;
-        Socket s;
+        private static DealControl instance;
+        private static readonly object locker = new object();
+        private Thread thReceiveBuffer;
+        private Thread thDealBuffer;
+        private bool connectState=false;
+        private List<ChannelData> channelList = new List<ChannelData>();
+        private List<string> channelNum = new List<string>();
+
+        private object m_lock = new object();
+        private const int ReceiveDataCount = 4048;
+        private const int PacketHeadSize = 12;
+        private int nNetPos = 0;
+        private Socket s;
         //网络缓存数据
         List<byte> m_NetData = new List<byte>();
         //处理缓存数据
-        byte[] m_TmpData;
+        private byte[] m_TmpData;
         //所有待处理的包数据
         private List<PackData> m_lstPackData = new List<PackData>();
+        private CdioControl cdioControl = CdioControl.GetInstance();
+        private IniFileControl inifileControl = IniFileControl.GetInstance();
 
-        public List<PackData> getPackData()
+        private DealControl()
         {
-            return this.m_lstPackData;
+         
+        }
+        public static DealControl GetInstance()
+        {
+            if (instance == null)
+            {
+                lock (locker)
+                {
+                    if (instance == null)
+                    {
+                        instance = new DealControl();
+                    }
+                }
+            }
+            return instance;
+        }
+        public void DealConnect()
+        {
+            if (connectState == false)
+            {
+                connectState = this.SocketConnectState();
+                thReceiveBuffer = new Thread(new ThreadStart(ReceiveData));
+                thReceiveBuffer.IsBackground = true;
+                thReceiveBuffer.Start();
+                thDealBuffer = new Thread(new ThreadStart(DealData));
+                thDealBuffer.IsBackground = true;
+                thDealBuffer.Start();
+                this.GetSignalInfo();
+            }
+        }
+        public void DealConnectDis()
+        {
+            if (connectState == true)
+            {
+                sendExit();
+                connectState = false;
+            }
         }
 
+        public bool getConnectState()
+        {
+            return this.connectState;
+        }
         //连接用函数
-        public bool SocketConnectState()
+        private bool SocketConnectState()
         {
             string txtIp = "192.168.0.30";
             string txtPort = "5003";
             IPEndPoint removeServer = new IPEndPoint(IPAddress.Parse(txtIp), int.Parse(txtPort));
-            s=new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             s.Connect(removeServer);
             if (s.Connected)
             {
@@ -44,7 +99,7 @@ namespace RollerTest.WebUI.ExternalProgram
                 return false;
             }
         }
-        public void GetSignalInfo()
+        private void GetSignalInfo()
         {
             s.Send(DealCmd.GetCmdGetSerialSignal());
             s.Send(DealCmd.GetCmdGetBlockSignal());
@@ -56,31 +111,31 @@ namespace RollerTest.WebUI.ExternalProgram
         /// <summary>
         /// 接收数据
         /// </summary>
-        public void ReceiveData()
+        private void ReceiveData()
         {
-            while (true)
-            {
-                byte[] recvData = new byte[ReceiveDataCount];
-                try
+                while (true)
                 {
-                    int nRecvCount = s.Receive(recvData); //接收数据，返回每次接收的字节总数
-                    for (int i = 0; i < nRecvCount; i++)
+                    byte[] recvData = new byte[ReceiveDataCount];
+                    try
                     {
-                        m_NetData.Add(recvData[i]);
+                        int nRecvCount = s.Receive(recvData); //接收数据，返回每次接收的字节总数
+                        for (int i = 0; i < nRecvCount; i++)
+                        {
+                            m_NetData.Add(recvData[i]);
+                        }
+                        ParseBuffer();
                     }
-                    ParseBuffer();
+                    catch
+                    {
+                        Console.WriteLine("ReceiveData Catch>>" + DateTime.Now);
+                    }
                 }
-                catch
-                {
-                    Console.WriteLine("ReceiveData Catch>>" + DateTime.Now);
-                }
-            }
         }
 
         /// <summary>
         /// 处理缓存数据
         /// </summary>
-         void ParseBuffer()
+        private void ParseBuffer()
         {
             m_TmpData = new byte[m_NetData.Count - nNetPos];
             Array.Copy(m_NetData.ToArray(), nNetPos, m_TmpData, 0, (m_NetData.Count - nNetPos));
@@ -104,7 +159,7 @@ namespace RollerTest.WebUI.ExternalProgram
         /// </summary>
         /// <param name="nAlreadyRecCount">接收的数据长度</param>
         /// <param name="nDataPointer">第几个字节开始为包头位置</param>
-        void FindPackHead(int nAlreadyRecCount, int nDataPointer)
+        private void FindPackHead(int nAlreadyRecCount, int nDataPointer)
         {
             // 找到一个数据报头信息
             // 网络包长度小于包头时不是一个完整的包
@@ -136,7 +191,7 @@ namespace RollerTest.WebUI.ExternalProgram
         /// <summary>
         /// 设置包头
         /// </summary>
-        void SetPackHead(int nDataPointer, ref PackHead m_PackHead)
+        private void SetPackHead(int nDataPointer, ref PackHead m_PackHead)
         {
             m_PackHead.Reset();
             m_PackHead.m_Signature[0] = m_TmpData[nDataPointer];
@@ -158,43 +213,42 @@ namespace RollerTest.WebUI.ExternalProgram
 
 
 
- //处理数据调用函数
+        //处理数据调用函数
 
         /// <summary>
         /// 处理数据
         /// </summary>
-        public void DealData()
+        private void DealData()
         {
-            while (true)
-            {
-                lock (m_lock)
+                while (true)
                 {
-                    if (m_lstPackData.Count == 0)
+                    lock (m_lock)
                     {
-                        Thread.Sleep(100);
+                        if (m_lstPackData.Count == 0)
+                        {
+                            Thread.Sleep(100);
+                        }
+                        else
+                        {
+                            DealComData();
+                            //处理完包数据后，将m_NetData中用过的数据清除
+                            // 一直到 位置nNetPos 的m_NetData的数据已经用过
+                            m_NetData.RemoveRange(0, nNetPos);
+                            nNetPos = 0;
+                        }
                     }
-                    else
-                    {
-                        DealComData();
-                        //处理完包数据后，将m_NetData中用过的数据清除
-                        // 一直到 位置nNetPos 的m_NetData的数据已经用过
-                        m_NetData.RemoveRange(0, nNetPos);
-                        nNetPos = 0;
-                    }
-                }
-            }
+                }   
         }
 
 
         /// <summary>
         /// 处理完整包数据
         /// </summary>
-        public List<string> DealComData()
+        public void DealComData()
         {
-            List<string> str = new List<string>();
             string txtres = "";
-            string txtSignalInfo = "";
             string res = "";
+            List<String> value = new List<string>();
             for (int i = 0; i < m_lstPackData.Count; i++)
             {
                 PackData pd = m_lstPackData[i];
@@ -202,7 +256,11 @@ namespace RollerTest.WebUI.ExternalProgram
                 {
                     case 128:
                         res = DealCmd.DealGetSignal(pd);
-                        txtSignalInfo += "Commond 128  信号类型：" + pd.m_SignalType + ";内容:" + res + Environment.NewLine;
+                        if (res != string.Empty)
+                        {
+                            channelNum = GetChannel(res);
+                        }
+                        //txtSignalInfo += "Commond 128  信号类型：" + pd.m_SignalType + ";内容:" + res + Environment.NewLine;
                         break;
                     case 123:
                         res = DealCmd.DealTransferDataSignal(pd);
@@ -210,8 +268,19 @@ namespace RollerTest.WebUI.ExternalProgram
                         break;
                     case 124:
                         res = DealCmd.DealSerialData(pd);
-                        txtres += "Commond 124Serial  信号位置：" + pd.m_Position + ";数据量:" + pd.m_DataCount + ";信号数："
-                            + pd.m_SignalCount + Environment.NewLine + "数据：" + res + Environment.NewLine;
+                        string[] sArray = res.Split(new char[] { '\r', '\n' },StringSplitOptions.RemoveEmptyEntries);
+                        
+                        int j = 0;
+                        foreach(var p in channelNum)
+                        {
+                            ChannelData channeldata = new ChannelData()
+                            {
+                                channel = p,
+                                data=sArray[j]
+                            };
+                            channelList.Add(channeldata);
+                            j++;
+                        }
                         break;
                     case 125:
                         res = DealCmd.DealStatData(pd);
@@ -225,18 +294,42 @@ namespace RollerTest.WebUI.ExternalProgram
                 }
             }
             m_lstPackData.Clear();
-            str.Add(txtres);
-            str.Add(txtSignalInfo);
-            return str;
+            if (channelList!=null)
+            {
+                HandleGetData(channelList);
+            }
         }
 
-// 操作方法
+        private void HandleGetData(List<ChannelData> info)
+        {
+            foreach(var p in info)
+            {
+                Send(p.channel, p.data);
+            }
+        }
+
+        private List<string> GetChannel(string res)
+        {
+            List<string> tmpChannel = new List<string>();
+            string[] temp = res.Split('|');
+            for (int i = 0; i < temp.Length - 1; i++)
+            {
+                temp[i] = temp[i].Substring(0, 8);
+                tmpChannel.Add(temp[i]);
+            }
+            return tmpChannel;
+        }
+
+
+        // 操作方法
 
         //发送“服务器退出提示”
         void sendExit()
         {
             s.Shutdown(SocketShutdown.Both);
             s.Close();
+            thDealBuffer.Abort();
+            thReceiveBuffer.Abort();
         }
         bool CheckSocket()
         {
@@ -248,13 +341,20 @@ namespace RollerTest.WebUI.ExternalProgram
             }
             return res;
         }
+        public void Send(string station, string data)
+        {
+            var dataHub = GlobalHost.ConnectionManager.GetHubContext("dataHub");
+            dataHub.Clients.All.addNewDataToPage(station, data);
+        }
+
 
     }
 
-
-
-//  定义包数据成员变量
-
+    public class ChannelData
+    {
+        public string channel;
+        public string data;
+    }
     public class PackData
     {
         public int m_Index;

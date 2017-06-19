@@ -22,9 +22,21 @@ namespace RollerTest.WebUI.Controllers
         [HttpPost]
         public ActionResult EditProject(RollerProjectInfo rollerprojectinfo)
         {
+            if (ModelState.IsValid)
+            {
+                projectrepository.SaveRollerProjectInfo(rollerprojectinfo);
+                return RedirectToAction("Index", "Sample");
+            }
+            else
+            {
+                SettingViewModel settingviewModel = new SettingViewModel(baserepository);
+                ViewData["StandardList"] = settingviewModel.GetStandardList();
+                ViewData["LocationList"] = settingviewModel.GetLocationList();
+                ViewData["ConditionList"] = settingviewModel.GetConditionList();
+                ViewData["DeviceList"] = settingviewModel.GetDeviceList();
+                return View(rollerprojectinfo);
+            }
 
-            projectrepository.SaveRollerProjectInfo(rollerprojectinfo);
-            return RedirectToAction("Index","Sample");
         }
         public ViewResult EditProject(int RollerProjectInfoID)
         {
@@ -50,7 +62,7 @@ namespace RollerTest.WebUI.Controllers
             ViewData["LocationList"] = settingviewModel.GetLocationList();
             ViewData["ConditionList"] = settingviewModel.GetConditionList();
             ViewData["DeviceList"] = settingviewModel.GetDeviceList();
-            return View("EditProject", new RollerProjectInfo());
+            return View("EditProject", new RollerProjectInfo() { TestPerson=AccountController.LoginUser});
         }
         public ActionResult Index()
         {

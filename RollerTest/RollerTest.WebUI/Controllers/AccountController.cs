@@ -17,6 +17,7 @@ namespace RollerTest.WebUI.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        public static string LoginUser;
 
         public AccountController()
         {
@@ -79,6 +80,7 @@ namespace RollerTest.WebUI.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    LoginUser = model.Email;
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");

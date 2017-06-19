@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.SignalR;
+﻿using Hangfire;
+using Microsoft.AspNet.SignalR;
 using RollerTest.WebUI.IniFiles;
 using System;
 using System.Collections.Generic;
@@ -17,8 +18,10 @@ namespace RollerTest.WebUI.ExternalProgram
     {
         private static DealControl instance;
         private static readonly object locker = new object();
-        private Thread thReceiveBuffer;
-        private Thread thDealBuffer;
+        private CancellationTokenSource Receivects;
+        private CancellationTokenSource Dealcts;
+        private Task ReceiveTask;
+        private Task DealTask;
         private bool connectState=false;
         private List<ChannelData> channelList = new List<ChannelData>();
         private List<string> channelNum = new List<string>();
@@ -34,6 +37,7 @@ namespace RollerTest.WebUI.ExternalProgram
         private byte[] m_TmpData;
         //所有待处理的包数据
         private List<PackData> m_lstPackData = new List<PackData>();
+
         private CdioControl cdioControl = CdioControl.GetInstance();
         private IniFileControl inifileControl = IniFileControl.GetInstance();
 
@@ -60,12 +64,12 @@ namespace RollerTest.WebUI.ExternalProgram
             if (connectState == false)
             {
                 connectState = this.SocketConnectState();
-                thReceiveBuffer = new Thread(new ThreadStart(ReceiveData));
-                thReceiveBuffer.IsBackground = true;
-                thReceiveBuffer.Start();
-                thDealBuffer = new Thread(new ThreadStart(DealData));
-                thDealBuffer.IsBackground = true;
-                thDealBuffer.Start();
+                Receivects = new CancellationTokenSource();
+                Dealcts = new CancellationTokenSource();
+                ReceiveTask = new Task(() => ReceiveData(), Receivects.Token);
+                DealTask = new Task(() => DealData(), Dealcts.Token);
+                ReceiveTask.Start();
+                DealTask.Start();
                 this.GetSignalInfo();
             }
         }
@@ -113,7 +117,7 @@ namespace RollerTest.WebUI.ExternalProgram
         /// </summary>
         private void ReceiveData()
         {
-                while (true)
+                while (!Receivects.IsCancellationRequested)
                 {
                     byte[] recvData = new byte[ReceiveDataCount];
                     try
@@ -220,7 +224,7 @@ namespace RollerTest.WebUI.ExternalProgram
         /// </summary>
         private void DealData()
         {
-                while (true)
+                while (!Dealcts.IsCancellationRequested)
                 {
                     lock (m_lock)
                     {
@@ -326,10 +330,11 @@ namespace RollerTest.WebUI.ExternalProgram
         //发送“服务器退出提示”
         void sendExit()
         {
+
+            Receivects.Cancel();
+            Dealcts.Cancel();
             s.Shutdown(SocketShutdown.Both);
             s.Close();
-            thDealBuffer.Abort();
-            thReceiveBuffer.Abort();
         }
         bool CheckSocket()
         {

@@ -13,12 +13,19 @@ namespace RollerTest.Domain.Entities
         [Key]
         [HiddenInput(DisplayValue =false)]
         public int RollerProjectInfoID { get; set; }
+        [Required]
         public string Commission { get; set; }
+        [Required]
         public string TestName { get; set; }
+        [Required]
         public string TestLocation { get; set; }
+        [Required]
         public string TestCondition { get; set; }
+        [Required]
         public string TestStandard { get; set; }
+        [Required]
         public string TestDevice { get; set; }
+        [Required]
         public string TestPerson { get; set; }
 
         public virtual ICollection<RollerSampleInfo> RollerSampleInfo { get; set; }

@@ -10,41 +10,57 @@
             <div class="row">
                 <div class="col-lg-12">
                     <form method="post" class="form-horizontal" action="~/Sample/EditSample">
+                        @Html.ValidationSummary(true)
                         @Html.HiddenFor(x => x.RollerSampleInfoID)
                         @Html.HiddenFor(x=>x.RollerProjectInfoID)
                         @Html.HiddenFor(x=>x.State)
                         <div class="form-group">
                             <label class="col-sm-2 control-label">样品编号</label>
-
-                            <div class="col-sm-9">@Html.EditorFor(x => x.SampleID)</div>
+                            <div class="col-sm-9">
+                                @Html.EditorFor(x => x.SampleID)
+                                @Html.ValidationMessageFor(x=>x.SampleID)
+                            </div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">样品名称</label>
 
-                            <div class="col-sm-9">@Html.EditorFor(x => x.SampleName)</div>
+                            <div class="col-sm-9">
+                            @Html.EditorFor(x => x.SampleName)
+                            @Html.ValidationMessageFor(x => x.SampleName)
+                            </div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">工位</label>
 
-                            <div class="col-sm-10">@Html.DropDownListFor(x => x.RollerBaseStationID, ViewData["StationList"] as IEnumerable<SelectListItem>, "--------------------------------------请选择-------------------------------------")</div>
+                            <div class="col-sm-10">
+                            @Html.DropDownListFor(x => x.RollerBaseStationID, ViewData["StationList"] as IEnumerable<SelectListItem>, "--------------------------------------请选择-------------------------------------")
+                            @Html.ValidationMessageFor(x => x.RollerBaseStationID)
+                            </div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">上限值</label>
-                            <div class="col-sm-9">@Html.EditorFor(x => x.UpLimit)</div>
+                            <div class="col-sm-9">@Html.EditorFor(x => x.UpLimit)
+                                @Html.ValidationMessageFor(x => x.UpLimit)
+                            </div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">下限值</label>
-                            <div class="col-sm-9">@Html.EditorFor(x => x.DnLimit)</div>
+                            <div class="col-sm-9">@Html.EditorFor(x => x.DnLimit)
+                                @Html.ValidationMessageFor(x => x.DnLimit)
+                            </div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">设定值</label>
-                            <div class="col-sm-9">@Html.EditorFor(x => x.SetValue)</div>
+                            <div class="col-sm-9">
+                            @Html.EditorFor(x => x.SetValue)
+                            @Html.ValidationMessageFor(x=>x.SetValue)
+                            </div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="col-lg-offset-5">

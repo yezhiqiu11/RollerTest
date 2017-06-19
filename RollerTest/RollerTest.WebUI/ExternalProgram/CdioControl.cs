@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Timers;
+using Hangfire;
 
 namespace RollerTest.WebUI.ExternalProgram
 {
@@ -33,7 +34,7 @@ namespace RollerTest.WebUI.ExternalProgram
             }
             return instance;
         }
-        private void ControlTimer_Elapsed(object sender, ElapsedEventArgs e)
+        public void MonitorMoto()
         {
             if (moterState.IsMotoRunning == false)
             {
@@ -50,7 +51,11 @@ namespace RollerTest.WebUI.ExternalProgram
                     cdioMethod.MotoRun(1);
                 }
             }
+        }
 
+        private void ControlTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            MonitorMoto();
         }
         public string InitMoto()
         {

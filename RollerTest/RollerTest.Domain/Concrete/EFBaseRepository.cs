@@ -12,8 +12,8 @@ namespace RollerTest.Domain.Concrete
 {
     public class EFBaseRepository:IBaseRepository
     {
-        private EFDbContext context = ContextControl.GetInstance().getContext();
-        //private EFDbContext context = new EFDbContext();
+        //private EFDbContext context = ContextControl.GetInstance().getContext();
+        private EFDbContext context = new EFDbContext();
         public IQueryable<RollerBaseLocation> RollerBaseLocations
         {
             get

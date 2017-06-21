@@ -1,4 +1,6 @@
-﻿using RollerTest.Domain.Abstract;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using RollerTest.Domain.Abstract;
 using RollerTest.Domain.Concrete;
 using RollerTest.Domain.Entities;
 using RollerTest.WebUI.Models;
@@ -7,9 +9,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace RollerTest.WebUI.Controllers
 {
+    [Authorize(Roles ="Tester,Admin")]
     public class ProjectController : Controller
     {
         private IProjectRepository projectrepository;
@@ -62,7 +66,9 @@ namespace RollerTest.WebUI.Controllers
             ViewData["LocationList"] = settingviewModel.GetLocationList();
             ViewData["ConditionList"] = settingviewModel.GetConditionList();
             ViewData["DeviceList"] = settingviewModel.GetDeviceList();
-            return View("EditProject", new RollerProjectInfo() { TestPerson=AccountController.LoginUser});
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            ApplicationUser user = userManager.FindByNameAsync(User.Identity.Name).Result;
+            return View("EditProject", new RollerProjectInfo() { TestPerson = user.UserName });
         }
         public ActionResult Index()
         {

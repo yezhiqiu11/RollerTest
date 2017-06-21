@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using RollerTest.WebUI.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
+using System.Web.Routing;
 
 namespace RollerTest.WebUI.Controllers
 {
@@ -83,7 +84,7 @@ namespace RollerTest.WebUI.Controllers
             {
                 case SignInStatus.Success:
                     //return RedirectToLocal(returnUrl);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index","Home");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:

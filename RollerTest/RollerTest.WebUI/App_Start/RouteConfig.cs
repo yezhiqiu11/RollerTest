@@ -14,9 +14,9 @@ namespace RollerTest.WebUI
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name:"Login",
-                url:"Login/{name}",
-                defaults: new {Controller="Account",action="Login"}
+                name: "Login",
+                url: "Login/{name}",
+                defaults: new { Controller = "Account", action = "Login" }
                 );
 
             routes.MapRoute(

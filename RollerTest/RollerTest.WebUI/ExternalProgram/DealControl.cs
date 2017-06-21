@@ -1,5 +1,6 @@
 ﻿using Hangfire;
 using Microsoft.AspNet.SignalR;
+using RollerTest.Domain.Entities;
 using RollerTest.WebUI.IniFiles;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,8 @@ namespace RollerTest.WebUI.ExternalProgram
         private bool connectState=false;
         private List<ChannelData> channelList = new List<ChannelData>();
         private List<string> channelNum = new List<string>();
+        private RollerLimit rollerLimit = new RollerLimit();
+        private FaultData faultdata = new FaultData();
 
         private object m_lock = new object();
         private const int ReceiveDataCount = 4048;
@@ -44,6 +47,30 @@ namespace RollerTest.WebUI.ExternalProgram
         private DealControl()
         {
          
+        }
+        public RollerLimit getRollerLimit()
+        {
+            return rollerLimit;
+        }
+        public void setRollerLimit(int stationId,int UpLimit,int DnLimit)
+        {
+            switch (stationId)
+            {
+                case 1:rollerLimit.DnLimit1 = DnLimit;rollerLimit.UpLimit1 = UpLimit;break;
+                case 2: rollerLimit.DnLimit2 = DnLimit; rollerLimit.UpLimit2 = UpLimit; break;
+                case 3: rollerLimit.DnLimit3 = DnLimit; rollerLimit.UpLimit3 = UpLimit; break;
+                case 4: rollerLimit.DnLimit4 = DnLimit; rollerLimit.UpLimit4 = UpLimit; break;
+                case 5: rollerLimit.DnLimit5 = DnLimit; rollerLimit.UpLimit5 = UpLimit; break;
+                case 6: rollerLimit.DnLimit6 = DnLimit; rollerLimit.UpLimit6 = UpLimit; break;
+                case 7: rollerLimit.DnLimit7 = DnLimit; rollerLimit.UpLimit7 = UpLimit; break;
+                case 8: rollerLimit.DnLimit8 = DnLimit; rollerLimit.UpLimit8 = UpLimit; break;
+                case 9: rollerLimit.DnLimit9 = DnLimit; rollerLimit.UpLimit9 = UpLimit; break;
+                case 10: rollerLimit.DnLimit10 = DnLimit; rollerLimit.UpLimit10 = UpLimit; break;
+                case 11: rollerLimit.DnLimit11 = DnLimit; rollerLimit.UpLimit11 = UpLimit; break;
+                case 12: rollerLimit.DnLimit12 = DnLimit; rollerLimit.UpLimit12 = UpLimit; break;
+                default:break;
+
+            }
         }
         public static DealControl GetInstance()
         {
@@ -311,6 +338,33 @@ namespace RollerTest.WebUI.ExternalProgram
                 Send(p.channel, p.data);
             }
         }
+        private void JudgeLimit(ChannelData channeldata)
+        {
+            float data = float.Parse(channeldata.data);
+            switch (channeldata.channel)
+            {
+                case "AI1-1-01": {
+                        if (data < rollerLimit.DnLimit1 && data > rollerLimit.UpLimit1) {
+                            faultdata.station = "1#";
+                            faultdata.UpLimit = rollerLimit.UpLimit1.ToString();
+                            faultdata.DnLimit = rollerLimit.DnLimit1.ToString();
+                            faultdata.Value = channeldata.data;
+                        }
+                        break;
+                    } 
+                case "AI1-1-02": y2.innerHTML = data + "N"; break;
+                case "AI1-1-03": y3.innerHTML = data + "N"; break;
+                case "AI1-1-04": y4.innerHTML = data + "N"; break;
+                case "AI1-1-05": y5.innerHTML = data + "N"; break;
+                case "AI1-1-06": y6.innerHTML = data + "N"; break;
+                case "AI1-1-07": y7.innerHTML = data + "N"; break;
+                case "AI1-1-08": y8.innerHTML = data + "N"; break;
+                case "AI1-1-09": y9.innerHTML = data + "N"; break;
+                case "AI1-1-10": y10.innerHTML = data + "N"; break;
+                case "AI1-1-11": y11.innerHTML = data + "N"; break;
+                case "AI1-1-12": y12.innerHTML = data + "N"; break;
+            }
+        }
 
         private List<string> GetChannel(string res)
         {
@@ -359,6 +413,13 @@ namespace RollerTest.WebUI.ExternalProgram
     {
         public string channel;
         public string data;
+    }
+    public class FaultData
+    {
+        public string station;
+        public string UpLimit;
+        public string DnLimit;
+        public string Value;
     }
     public class PackData
     {

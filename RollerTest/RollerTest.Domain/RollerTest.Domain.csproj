@@ -100,6 +100,7 @@
     <Compile Include="Entities\RollerBaseLocation.cs" />
     <Compile Include="Entities\RollerBaseStation.cs" />
     <Compile Include="Entities\RollerBaseStandard.cs" />
+    <Compile Include="Entities\RollerLimit.cs" />
     <Compile Include="Entities\RollerProjectInfo.cs" />
     <Compile Include="Entities\RollerRealtimeInfo.cs" />
     <Compile Include="Entities\RollerRecordInfo.cs" />

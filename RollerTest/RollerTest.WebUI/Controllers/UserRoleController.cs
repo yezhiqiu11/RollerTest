@@ -10,7 +10,6 @@ using System.Web.Mvc;
 
 namespace RollerTest.WebUI.Controllers
 {
-    [Authorize(Roles ="Admin")]
     public class UserRoleController : Controller
     {
         // GET: UserRole
@@ -96,7 +95,6 @@ namespace RollerTest.WebUI.Controllers
             idm.DeleteUserRole(userId, roleName);
             return RedirectToAction("UserRolesIndex", "UserRole", new { userId = userId });
         }
-
         public ActionResult ClearUserRoles(string userId)
         {
             IdentityManager idm = new IdentityManager();

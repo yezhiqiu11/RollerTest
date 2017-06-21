@@ -15,8 +15,8 @@ namespace RollerTest.WebUI
             GlobalConfiguration.Configuration.UseSqlServerStorage("HangfireConnection");
             app.UseHangfireDashboard();
             app.UseHangfireServer();
-            //EFDbContext context = new EFDbContext();
-            //context.Database.CreateIfNotExists();
+            EFDbContext context = new EFDbContext();
+            context.Database.CreateIfNotExists();
             app.MapSignalR();
         }
     }

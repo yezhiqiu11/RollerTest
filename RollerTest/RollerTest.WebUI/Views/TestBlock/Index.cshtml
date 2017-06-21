@@ -95,6 +95,7 @@
                                                     <div class="pull-right">
                                                         <div>
                                                             @Html.ActionLink("开启","OpenTest",new { StationId = p.RollerBaseStationID},new {@class="btn btn-xs btn-white fa fa-thumbs-up"})
+                                                            @Html.ActionLink("暂停", "PauseTest", new { StationId = p.RollerBaseStationID }, new { @class = "btn btn-xs btn-white fa fa-thumbs-up" })
                                                             @Html.ActionLink("关闭", "CloseTest", new { StationId = p.RollerBaseStationID }, new { @class = "btn btn-xs btn-white fa fa-thumbs-up" })
                                                             @Html.ActionLink("清零", "CleanTest", new { StationId = p.RollerBaseStationID }, new { @class = "btn btn-xs btn-white fa fa-thumbs-up" })
                                                         </div>

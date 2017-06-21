@@ -57,5 +57,14 @@ namespace RollerTest.Domain.Concrete
             }
             context.SaveChanges();
         }
+        public void setsampleState(int Id,bool state)
+        {
+            RollerSampleInfo dbEntry = context.RollerSampleInfos.Find(Id);
+            if (dbEntry != null)
+            {
+                dbEntry.State = state;
+            }
+            context.SaveChanges();
+        }
     }
 }

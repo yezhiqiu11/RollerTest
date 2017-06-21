@@ -336,34 +336,151 @@ namespace RollerTest.WebUI.ExternalProgram
             foreach(var p in info)
             {
                 Send(p.channel, p.data);
+                if (JudgeLimit(p)) {
+
+                };
             }
         }
-        private void JudgeLimit(ChannelData channeldata)
+        private bool JudgeLimit(ChannelData channeldata)
         {
             float data = float.Parse(channeldata.data);
             switch (channeldata.channel)
             {
-                case "AI1-1-01": {
+                case "AI1-1-01":
+                    {
                         if (data < rollerLimit.DnLimit1 && data > rollerLimit.UpLimit1) {
                             faultdata.station = "1#";
                             faultdata.UpLimit = rollerLimit.UpLimit1.ToString();
                             faultdata.DnLimit = rollerLimit.DnLimit1.ToString();
                             faultdata.Value = channeldata.data;
+                            return true;
                         }
                         break;
                     } 
-                case "AI1-1-02": y2.innerHTML = data + "N"; break;
-                case "AI1-1-03": y3.innerHTML = data + "N"; break;
-                case "AI1-1-04": y4.innerHTML = data + "N"; break;
-                case "AI1-1-05": y5.innerHTML = data + "N"; break;
-                case "AI1-1-06": y6.innerHTML = data + "N"; break;
-                case "AI1-1-07": y7.innerHTML = data + "N"; break;
-                case "AI1-1-08": y8.innerHTML = data + "N"; break;
-                case "AI1-1-09": y9.innerHTML = data + "N"; break;
-                case "AI1-1-10": y10.innerHTML = data + "N"; break;
-                case "AI1-1-11": y11.innerHTML = data + "N"; break;
-                case "AI1-1-12": y12.innerHTML = data + "N"; break;
+                case "AI1-1-02":
+                    {
+                        if (data < rollerLimit.DnLimit2 && data > rollerLimit.UpLimit2)
+                        {
+                            faultdata.station = "2#";
+                            faultdata.UpLimit = rollerLimit.UpLimit2.ToString();
+                            faultdata.DnLimit = rollerLimit.DnLimit2.ToString();
+                            faultdata.Value = channeldata.data;
+                            return true;
+                        }
+                        break;
+                    }
+                case "AI1-1-03":
+                    {
+                        if (data < rollerLimit.DnLimit3 && data > rollerLimit.UpLimit3)
+                        {
+                            faultdata.station = "3#";
+                            faultdata.UpLimit = rollerLimit.UpLimit3.ToString();
+                            faultdata.DnLimit = rollerLimit.DnLimit3.ToString();
+                            faultdata.Value = channeldata.data;
+                            return true;
+                        }
+                        break;
+                    }
+                case "AI1-1-04":
+                    {
+                        if (data < rollerLimit.DnLimit4 && data > rollerLimit.UpLimit4)
+                        {
+                            faultdata.station = "4#";
+                            faultdata.UpLimit = rollerLimit.UpLimit4.ToString();
+                            faultdata.DnLimit = rollerLimit.DnLimit4.ToString();
+                            faultdata.Value = channeldata.data;
+                            return true;
+                        }
+                        break;
+                    }
+                case "AI1-1-05":
+                    {
+                        if (data < rollerLimit.DnLimit5 && data > rollerLimit.UpLimit5)
+                        {
+                            faultdata.station = "5#";
+                            faultdata.UpLimit = rollerLimit.UpLimit5.ToString();
+                            faultdata.DnLimit = rollerLimit.DnLimit5.ToString();
+                            faultdata.Value = channeldata.data;
+                            return true;
+                        }
+                        break;
+                    }
+                case "AI1-1-06":
+                    {
+                        if (data < rollerLimit.DnLimit6 && data > rollerLimit.UpLimit6)
+                        {
+                            faultdata.station = "6#";
+                            faultdata.UpLimit = rollerLimit.UpLimit6.ToString();
+                            faultdata.DnLimit = rollerLimit.DnLimit6.ToString();
+                            faultdata.Value = channeldata.data;
+                            return true;
+                        }
+                        break;
+                    }
+                case "AI1-1-07":
+                    {
+                        if (data < rollerLimit.DnLimit7 && data > rollerLimit.UpLimit7)
+                        {
+                            faultdata.station = "7#";
+                            faultdata.UpLimit = rollerLimit.UpLimit7.ToString();
+                            faultdata.DnLimit = rollerLimit.DnLimit7.ToString();
+                            faultdata.Value = channeldata.data;
+                            return true;
+                        }
+                        break;
+                    }
+                case "AI1-1-08":
+                    if (data < rollerLimit.DnLimit8 && data > rollerLimit.UpLimit8)
+                    {
+                        faultdata.station = "8#";
+                        faultdata.UpLimit = rollerLimit.UpLimit8.ToString();
+                        faultdata.DnLimit = rollerLimit.DnLimit8.ToString();
+                        faultdata.Value = channeldata.data;
+                        return true;
+                    }
+                    break;
+                case "AI1-1-09":
+                    if (data < rollerLimit.DnLimit9 && data > rollerLimit.UpLimit9)
+                    {
+                        faultdata.station = "9#";
+                        faultdata.UpLimit = rollerLimit.UpLimit9.ToString();
+                        faultdata.DnLimit = rollerLimit.DnLimit9.ToString();
+                        faultdata.Value = channeldata.data;
+                        return true;
+                    }
+                    break;
+                case "AI1-1-10":
+                    if (data < rollerLimit.DnLimit10 && data > rollerLimit.UpLimit10)
+                    {
+                        faultdata.station = "10#";
+                        faultdata.UpLimit = rollerLimit.UpLimit10.ToString();
+                        faultdata.DnLimit = rollerLimit.DnLimit10.ToString();
+                        faultdata.Value = channeldata.data;
+                        return true;
+                    }
+                    break;
+                case "AI1-1-11":
+                    if (data < rollerLimit.DnLimit11 && data > rollerLimit.UpLimit11)
+                    {
+                        faultdata.station = "11#";
+                        faultdata.UpLimit = rollerLimit.UpLimit11.ToString();
+                        faultdata.DnLimit = rollerLimit.DnLimit11.ToString();
+                        faultdata.Value = channeldata.data;
+                        return true;
+                    }
+                    break;
+                case "AI1-1-12":
+                    if (data < rollerLimit.DnLimit12 && data > rollerLimit.UpLimit12)
+                    {
+                        faultdata.station = "12#";
+                        faultdata.UpLimit = rollerLimit.UpLimit12.ToString();
+                        faultdata.DnLimit = rollerLimit.DnLimit12.ToString();
+                        faultdata.Value = channeldata.data;
+                        return true;
+                    }
+                    break;
             }
+            return false;
         }
 
         private List<string> GetChannel(string res)

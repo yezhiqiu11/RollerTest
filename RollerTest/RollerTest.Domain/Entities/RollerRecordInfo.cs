@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace RollerTest.Domain.Entities
 {
@@ -15,9 +16,11 @@ namespace RollerTest.Domain.Entities
         [ForeignKey("RollerSampleInfo")]
         public int RollerSampleInfoID { get; set; }
         public virtual RollerSampleInfo RollerSampleInfo { get; set; }
+        [Required(ErrorMessage = "请输入样品状态")]
         public bool SampleStatus { get; set; }
         public DateTime CurrentTime { get; set; }
         public TimeSpan TotalTime { get; set; }
+        [Required(ErrorMessage = "请输入样品信息")]
         public string RecordInfo { get; set; }
     }
 }

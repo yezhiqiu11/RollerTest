@@ -12,6 +12,7 @@ namespace RollerTest.WebUI
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+
             GlobalConfiguration.Configuration.UseSqlServerStorage("HangfireConnection");
             app.UseHangfireDashboard();
             app.UseHangfireServer();

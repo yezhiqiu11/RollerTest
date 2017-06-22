@@ -17,6 +17,7 @@ namespace RollerTest.WebUI.Controllers
         private ISampleinfoRepository samplerepo;
         private IBaseRepository baserepo;
         private IRealtimeinfoRepository realtimerepo;
+
         public TestBlockController(ISampleinfoRepository repo, IRealtimeinfoRepository rtrepo,IBaseRepository baserepo)
         {
             samplerepo = repo;
@@ -37,6 +38,7 @@ namespace RollerTest.WebUI.Controllers
             RollerRealtimeInfo rollerrealtimeInfo = realtimerepo.RollerRealtimeInfos.FirstOrDefault(x => x.RollerSampleInfoID == RollerSampleInfoId);
             return PartialView(rollerrealtimeInfo);
         }
+
         public void OpenTest(int StationId)
         {
             if (baserepo.RollerBaseStations.FirstOrDefault(x => x.RollerBaseStationID == StationId).State == false)

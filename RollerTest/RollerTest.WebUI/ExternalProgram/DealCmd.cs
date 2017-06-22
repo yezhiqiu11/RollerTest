@@ -146,31 +146,6 @@ namespace RollerTest.WebUI.ExternalProgram
         }
 
         /// <summary>
-        /// 处理 Cmd 123   启动采样前，发送数据的信号信息
-        /// </summary>
-        /// <param name="pd"></param>
-        /// <returns></returns>
-        public static string DealTransferDataSignal(PackData pd)
-        {
-            List<byte> lstByte = pd.m_ByteData;
-            byte[] tmpByte = new byte[4];
-            byte[] tmpdata;
-            tmpByte[0] = lstByte[12];
-            tmpByte[1] = lstByte[13];
-            tmpByte[2] = lstByte[14];
-            tmpByte[3] = lstByte[15];
-            pd.m_SignalType = BitConverter.ToInt32(tmpByte, 0);
-
-            tmpdata = new byte[lstByte.Count - 16];
-            for (int m = 0; m < lstByte.Count - 16; m++)
-            {
-                tmpdata[m] = lstByte[m + 16];
-            }
-            string res = System.Text.Encoding.Default.GetString(tmpdata);
-            return res;
-        }
-
-        /// <summary>
         /// 处理 Cmd 124 //时间序列数据
         /// </summary>
         /// <param name="pd"></param>
@@ -260,6 +235,33 @@ namespace RollerTest.WebUI.ExternalProgram
             txtSignalData += Environment.NewLine;
             return txtSignalData;
         }
+
+        /// <summary>
+        /// 处理 Cmd 123   启动采样前，发送数据的信号信息
+        /// </summary>
+        /// <param name="pd"></param>
+        /// <returns></returns>
+        public static string DealTransferDataSignal(PackData pd)
+        {
+            List<byte> lstByte = pd.m_ByteData;
+            byte[] tmpByte = new byte[4];
+            byte[] tmpdata;
+            tmpByte[0] = lstByte[12];
+            tmpByte[1] = lstByte[13];
+            tmpByte[2] = lstByte[14];
+            tmpByte[3] = lstByte[15];
+            pd.m_SignalType = BitConverter.ToInt32(tmpByte, 0);
+
+            tmpdata = new byte[lstByte.Count - 16];
+            for (int m = 0; m < lstByte.Count - 16; m++)
+            {
+                tmpdata[m] = lstByte[m + 16];
+            }
+            string res = System.Text.Encoding.Default.GetString(tmpdata);
+            return res;
+        }
+
+
 
         /// <summary>
         /// 处理 Cmd 125 // 统计数据
@@ -445,5 +447,7 @@ namespace RollerTest.WebUI.ExternalProgram
         DATA_TYPE_BLOCK,
         DATA_TYPE_STAT
     }
+
+
 }
 

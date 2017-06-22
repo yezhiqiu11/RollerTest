@@ -20,8 +20,12 @@ namespace RollerTest.WebUI.ExternalProgram
         //处理缓存数据
         byte[] m_TmpData;
         //所有待处理的包数据
-        List<PackData> m_lstPackData = new List<PackData>();
+        private List<PackData> m_lstPackData = new List<PackData>();
 
+        public List<PackData> getPackData()
+        {
+            return this.m_lstPackData;
+        }
 
         //连接用函数
         public bool SocketConnectState()
@@ -40,16 +44,19 @@ namespace RollerTest.WebUI.ExternalProgram
                 return false;
             }
         }
-
-
-
+        public void GetSignalInfo()
+        {
+            s.Send(DealCmd.GetCmdGetSerialSignal());
+            s.Send(DealCmd.GetCmdGetBlockSignal());
+            s.Send(DealCmd.GetCmdGetStatSignal());
+        }
 
         //接收数据调用函数
 
         /// <summary>
         /// 接收数据
         /// </summary>
-        void ReceiveData()
+        public void ReceiveData()
         {
             while (true)
             {
@@ -73,7 +80,7 @@ namespace RollerTest.WebUI.ExternalProgram
         /// <summary>
         /// 处理缓存数据
         /// </summary>
-        void ParseBuffer()
+         void ParseBuffer()
         {
             m_TmpData = new byte[m_NetData.Count - nNetPos];
             Array.Copy(m_NetData.ToArray(), nNetPos, m_TmpData, 0, (m_NetData.Count - nNetPos));
@@ -156,7 +163,7 @@ namespace RollerTest.WebUI.ExternalProgram
         /// <summary>
         /// 处理数据
         /// </summary>
-        void DealData()
+        public void DealData()
         {
             while (true)
             {
@@ -240,13 +247,6 @@ namespace RollerTest.WebUI.ExternalProgram
                 res = true;
             }
             return res;
-        }
-
-        void GetSignalInfo()
-        {
-            s.Send(DealCmd.GetCmdGetSerialSignal());
-            s.Send(DealCmd.GetCmdGetBlockSignal());
-            s.Send(DealCmd.GetCmdGetStatSignal());
         }
 
     }

@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RollerTest.Domain.IniFiles
+namespace RollerTest.WebUI.IniFiles
 {
         public abstract class CustomIniFile
         {

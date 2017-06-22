@@ -10,42 +10,61 @@
                 <div class="row">
                     <div class="col-lg-12">       
                                 <form method="post" class="form-horizontal" action="~/Project/EditProject">
-                                    @Html.HiddenFor(x => x.RollerProjectInfoID)
-                                  
+                                    @Html.ValidationSummary(true)
+                                    @Html.HiddenFor(x => x.RollerProjectInfoID)                                
+                                    @Html.HiddenFor(x=>x.TestPerson)
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">委托单号</label>
 
-                                        <div class="col-sm-9">@Html.EditorFor(x => x.Commission)</div>
+                                        <div class="col-sm-9">
+                                            @Html.EditorFor(x => x.Commission)
+                                            @Html.ValidationMessageFor(x => x.Commission)
+                                        </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">试验名称</label>
 
-                                        <div class="col-sm-9">@Html.EditorFor(x => x.TestName)</div>
+                                        <div class="col-sm-9">
+                                        @Html.EditorFor(x => x.TestName)
+                                        @Html.ValidationMessageFor(x => x.TestName)
+                                        </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">试验标准</label>
 
-                                        <div class="col-sm-10">@Html.DropDownListFor(x => x.TestStandard, ViewData["StandardList"] as IEnumerable<SelectListItem>, "--------------------------------------请选择-------------------------------------")</div>
+                                        <div class="col-sm-10">
+                                        @Html.DropDownListFor(x => x.TestStandard, ViewData["StandardList"] as IEnumerable<SelectListItem>, "--------------------------------------请选择-------------------------------------")
+                                            @Html.ValidationMessageFor(x => x.TestStandard)
+                                        </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">试验地点</label>
 
-                                        <div class="col-sm-10">@Html.DropDownListFor(x => x.TestLocation, ViewData["LocationList"] as IEnumerable<SelectListItem>, "--------------------------------------请选择-------------------------------------")</div>
+                                        <div class="col-sm-10">
+                                        @Html.DropDownListFor(x => x.TestLocation, ViewData["LocationList"] as IEnumerable<SelectListItem>, "--------------------------------------请选择-------------------------------------")
+                                        @Html.ValidationMessageFor(x => x.TestLocation)
+                                        </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">试验条件</label>
 
-                                        <div class="col-sm-10">@Html.DropDownListFor(x => x.TestCondition, ViewData["ConditionList"] as IEnumerable<SelectListItem>, "--------------------------------------请选择-------------------------------------")</div>
+                                        <div class="col-sm-10">
+                                            @Html.DropDownListFor(x => x.TestCondition, ViewData["ConditionList"] as IEnumerable<SelectListItem>, "--------------------------------------请选择-------------------------------------")
+                                            @Html.ValidationMessageFor(x => x.TestCondition)
+                                        </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">试验装置</label>
 
-                                        <div class="col-sm-10">@Html.DropDownListFor(x => x.TestDevice, ViewData["DeviceList"] as IEnumerable<SelectListItem>, "--------------------------------------请选择-------------------------------------")</div>
+                                        <div class="col-sm-10">
+                                        @Html.DropDownListFor(x => x.TestDevice, ViewData["DeviceList"] as IEnumerable<SelectListItem>, "--------------------------------------请选择-------------------------------------")
+                                        @Html.ValidationMessageFor(x => x.TestDevice)
+                                        </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
                                     <div class="col-lg-offset-5">

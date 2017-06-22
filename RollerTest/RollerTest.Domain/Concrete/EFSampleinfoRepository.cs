@@ -12,8 +12,11 @@ namespace RollerTest.Domain.Concrete
 {
     public class EFSampleinfoRepository : ISampleinfoRepository
     {
-        private EFDbContext context = ContextControl.GetInstance().getContext();
-        private IBaseRepository baserepo;
+
+        //private EFDbContext context = ContextControl.GetInstance().getContext();
+        private EFDbContext context = new EFDbContext();
+
+
         public IQueryable<RollerSampleInfo> RollerSampleInfos
         {
             get
@@ -56,7 +59,18 @@ namespace RollerTest.Domain.Concrete
             }
             context.SaveChanges();
         }
-   
+
+  
+
+        public void setsampleState(int Id,bool state)
+        {
+            RollerSampleInfo dbEntry = context.RollerSampleInfos.Find(Id);
+            if (dbEntry != null)
+            {
+                dbEntry.State = state;
+            }
+            context.SaveChanges();
+        }
 
     }
 }

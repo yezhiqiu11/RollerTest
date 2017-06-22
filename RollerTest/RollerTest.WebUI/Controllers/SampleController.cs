@@ -1,6 +1,7 @@
 ﻿using RollerTest.Domain.Abstract;
 using RollerTest.Domain.Context;
 using RollerTest.Domain.Entities;
+using RollerTest.WebUI.IniFiles;
 using RollerTest.WebUI.Models;
 using System;
 using System.Collections.Generic;
@@ -26,15 +27,20 @@ namespace RollerTest.WebUI.Controllers
         // GET: Project
         public ActionResult Index()
         {
+            ProjectListViewModel projectlistviewModel = new ProjectListViewModel()
+            {
+                rollerprojectinfos = projectrepo.RollerProjectInfos
+            };
             
-            return View();
+            return View(projectlistviewModel);
         }
         public ActionResult ViewInfo(int RollerProjectInfoID)
         {
             SampleViewModel sampleviewmodel = new SampleViewModel()
             {
                 rollerprojectinfo = projectrepo.RollerProjectInfos.FirstOrDefault(a => a.RollerProjectInfoID == RollerProjectInfoID),
-                rollersampleinfos = repository.RollerSampleInfos.Where(a => a.RollerProjectInfo.RollerProjectInfoID == RollerProjectInfoID).Include(x => x.RollerBaseStation)
+                rollersampleinfos = repository.RollerSampleInfos.Where(a => a.RollerProjectInfo.RollerProjectInfoID == RollerProjectInfoID&&a.State==true).Include(x => x.RollerBaseStation),
+                 projectlistviewmodel = new ProjectListViewModel() { rollerprojectinfos = projectrepo.RollerProjectInfos }
             };
             return View(sampleviewmodel);
         }
@@ -47,8 +53,16 @@ namespace RollerTest.WebUI.Controllers
         [HttpPost]
         public ActionResult EditSample(RollerSampleInfo rollersampleinfo)
         {
-            repository.SaveRollerSampleInfo(rollersampleinfo);
-            return RedirectToAction("ViewInfo",new { RollerProjectInfoID= rollersampleinfo.RollerProjectInfoID });
+            if (ModelState.IsValid) {
+                repository.SaveRollerSampleInfo(rollersampleinfo);
+                return RedirectToAction("ViewInfo", new { RollerProjectInfoID = rollersampleinfo.RollerProjectInfoID });
+            }
+            else
+            {
+                SettingViewModel settingviewModel = new SettingViewModel(baserepository);
+                ViewData["StationList"] = settingviewModel.GetStationList(projectrepo.RollerProjectInfos.FirstOrDefault(a => a.RollerProjectInfoID == rollersampleinfo.RollerProjectInfoID).TestDevice);
+                return View(rollersampleinfo);
+            }
         }
         [HttpGet]
         public  ViewResult EditSample(int RollerSampleInfoID)
@@ -56,16 +70,18 @@ namespace RollerTest.WebUI.Controllers
             SettingViewModel settingviewModel = new SettingViewModel(baserepository);
             RollerSampleInfo rollersampleinfo = repository.RollerSampleInfos.FirstOrDefault(p => p.RollerSampleInfoID == RollerSampleInfoID);
             ViewData["StationList"] = settingviewModel.GetStationList(projectrepo.RollerProjectInfos.FirstOrDefault(a => a.RollerProjectInfoID == rollersampleinfo.RollerProjectInfo.RollerProjectInfoID).TestDevice);
-            
+            IniFileControl.GetInstance().CloseRollerTimeSwitch(rollersampleinfo.RollerBaseStation.Station);
             return View(rollersampleinfo);
         }
 
         [HttpPost]
         public ActionResult DeleteSample(int RollerSampleInfoID,int RollerProjectInfoId)
-        {          
+        {
+            IniFileControl.GetInstance().CloseRollerTimeSwitch(repository.RollerSampleInfos.FirstOrDefault(x=>x.RollerSampleInfoID==RollerSampleInfoID).RollerBaseStation.Station);
             repository.DeleteRollerSampleInfo(RollerSampleInfoID);
             return RedirectToAction("ViewInfo", new { RollerProjectInfoID = RollerProjectInfoId });
         }
+
 
     }
 }

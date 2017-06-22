@@ -1,0 +1,67 @@
+﻿@model RollerTest.Domain.Entities.RollerRecordInfo
+
+@{
+    ViewBag.Title = "TestingInfoView";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-12">
+                    <form method="post" class="form-horizontal" action="~/TestBlock/Index">
+                        @Html.HiddenFor(x => x.RollerRecordInfoID)
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">样品编号</label>
+                            <div class="col-sm-10">@Html.DropDownListFor(x => x.RollerSampleInfoID, ViewData["RollerSampleInfoID"] as IEnumerable<SelectListItem>, "--------------------------------------请选择-------------------------------------")</div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">样品状态信息</label>
+
+                            <div class="col-sm-9">@Html.EditorFor(x => x.RecordInfo)</div>
+                        </div>
+                        <div class="col-lg-offset-5">
+                            <input class="btn btn-primary" type="submit" value="提交" />
+                            @*Html.ActionLink("返回", "Index", "Sample")*@
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Styles {
+    @Styles.Render("~/Content/plugins/iCheck/iCheckStyles")
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/iCheck")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+    </script>
+}
+
+
+@*@using(Html.BeginForm("EditProject","Project",FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+         @Html.HiddenFor(x => x.RollerProjectInfoID)
+        <div>试验名称：@Html.EditorFor(x=>x.TestName)</div>
+        <div>委托单号：@Html.EditorFor(x => x.Commission)</div>
+        <div>试验标准：@Html.EditorFor(x => x.TestStandard)</div>
+        <div>试验条件：@Html.EditorFor(x => x.TestCondition)</div>
+        <div>试验场所：@Html.EditorFor(x => x.TestLocation)</div>
+        <div>试验设备：@Html.EditorFor(x => x.TestDevice)</div>
+        <div>试验人员：@Html.EditorFor(x => x.TestPerson)</div>
+        <input type="submit" value="提交" />
+        @Html.ActionLink("返回", "Index","Sample")
+    }*@

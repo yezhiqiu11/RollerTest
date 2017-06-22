@@ -6,13 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using RollerTest.Domain.Entities;
 using RollerTest.Domain.Context;
-using System.Web.Mvc;
 
 namespace RollerTest.Domain.Concrete
 {
     public class EFSampleinfoRepository : ISampleinfoRepository
     {
-
         //private EFDbContext context = ContextControl.GetInstance().getContext();
         private EFDbContext context = new EFDbContext();
 
@@ -59,9 +57,6 @@ namespace RollerTest.Domain.Concrete
             }
             context.SaveChanges();
         }
-
-  
-
         public void setsampleState(int Id,bool state)
         {
             RollerSampleInfo dbEntry = context.RollerSampleInfos.Find(Id);
@@ -71,6 +66,23 @@ namespace RollerTest.Domain.Concrete
             }
             context.SaveChanges();
         }
-
+        public void setsampleStartTime(RollerSampleInfo rollersampleinfo)
+        {
+            RollerSampleInfo dbEntry = rollersampleinfo;
+            if (dbEntry != null)
+            {
+                dbEntry.StartTime = DateTime.Now;
+            }
+            context.SaveChanges();
+        }
+        public void setsampleEndTime(int Id)
+        {
+            RollerSampleInfo dbEntry = context.RollerSampleInfos.Find(Id);
+            if (dbEntry != null)
+            {
+                dbEntry.EndTime = DateTime.Now;
+            }
+            context.SaveChanges();
+        }
     }
 }

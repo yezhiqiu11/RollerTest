@@ -29,13 +29,7 @@ namespace RollerTest.Domain.Context
         }
         public EFDbContext getContext()
         {
-            context.Configuration.LazyLoadingEnabled = true;
-            context.Configuration.ProxyCreationEnabled = true;
             return context;
-        }
-        public void disposeContext()
-        {
-            context.Dispose();
         }
     }
 }

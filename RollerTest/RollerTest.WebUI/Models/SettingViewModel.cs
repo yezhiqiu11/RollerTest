@@ -56,6 +56,7 @@ namespace RollerTest.WebUI.Models
         }
         public IEnumerable<SelectListItem> GetStationList(string device)
         {
+
             var selectList = baserepo.RollerBaseStations.Where(a=>a.Device==device&&a.RollerSampleInfo.Where(x=>x.State==true).Count()==0).Select(a => new SelectListItem
             {
                 Text = a.Station,

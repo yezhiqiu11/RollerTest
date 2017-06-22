@@ -170,7 +170,7 @@
                                                         <small class="text-muted">点击填写中间过程试验记录。</small>
                                                         <div class="pull-right">
                                                             @*<a href="#"><input type="button" class="btn btn-xs btn-white fa fa-thumbs-up" value="中间过程" /></a>*@
-                                                            @Html.ActionLink("中间过程", "TestingSampleInfo", new { Controller = "TestBlock", RollerSampleInfoId = p.RollerSampleInfoID }, new { @class = "btn btn-xs btn-white fa fa-thumbs-up" })
+                                                            @Html.ActionLink("中间过程", "Index", new { Controller = "SampleTestingRecord", RollerSampleInfoId = p.RollerSampleInfoID }, new { @class = "btn btn-xs btn-white fa fa-thumbs-up" })
                                                         </div>
                                                     </div>
                                                 </div>

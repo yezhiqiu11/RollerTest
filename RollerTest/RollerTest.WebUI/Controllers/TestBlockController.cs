@@ -14,10 +14,12 @@ namespace RollerTest.WebUI.Controllers
     {
         private ISampleinfoRepository samplerepo;
         private IRealtimeinfoRepository realtimerepo;
-        public TestBlockController(ISampleinfoRepository repo, IRealtimeinfoRepository rtrepo)
+        private IRecordinfoRepository recordinforepo;
+        public TestBlockController(ISampleinfoRepository repo, IRealtimeinfoRepository rtrepo,IRecordinfoRepository rirepo)
         {
             samplerepo = repo;
             realtimerepo = rtrepo;
+            recordinforepo = rirepo;
         }
         // GET: TestBlock
         public ActionResult Index()
@@ -33,15 +35,6 @@ namespace RollerTest.WebUI.Controllers
             RollerRealtimeInfo rollerrealtimeInfo = realtimerepo.RollerRealtimeInfos.FirstOrDefault(x => x.RollerSampleInfoID == RollerSampleInfoId);
             return PartialView(rollerrealtimeInfo);
         }
-        public ActionResult TestingSampleInfo(int RollerSampleInfoId)
-        {
-            //return View(new RollerRecordInfo() { RollerSampleInfoID = RollerSampleInfoId, SampleStatus = true });
-            // = recordinforepo.RollerRecordInfos.Where(x => x.SampleStatus == true).Where(x => x.RollerSampleInfoID == RollerSampleInfoId).Include(x => x.RollerSampleInfo);
-            SampleViewModel sampleviewmodel = new SampleViewModel()
-            {
-                rollersampleinfos = samplerepo.RollerSampleInfos.Where(a => a.State == true)
-            };
-            return View(sampleviewmodel);
-        }
+     
     }
 }

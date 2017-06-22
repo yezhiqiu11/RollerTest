@@ -10,7 +10,8 @@ namespace RollerTest.Domain.Abstract
     public interface IRecordinfoRepository
     {
         IQueryable<RollerRecordInfo> RollerRecordInfos { get; }
-        //void SaveRollerRecordInfo(RollerRecordInfo rollerrecordinfo);
-        //RollerRecordInfo DeleteRollerRecordInfo(int rollerrecordinfoID);
+
+        void SaveRollerRecordInfo(RollerRecordInfo rollerrecordinfo);
+        RollerRecordInfo DeleteRollerRecordInfo(int rollerrecordInfoID);
     }
 }

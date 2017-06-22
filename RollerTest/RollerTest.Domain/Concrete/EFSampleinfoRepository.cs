@@ -66,5 +66,23 @@ namespace RollerTest.Domain.Concrete
             }
             context.SaveChanges();
         }
+        public void setsampleStartTime(RollerSampleInfo rollersampleinfo)
+        {
+            RollerSampleInfo dbEntry = rollersampleinfo;
+            if (dbEntry != null)
+            {
+                dbEntry.StartTime = DateTime.Now;
+            }
+            context.SaveChanges();
+        }
+        public void setsampleEndTime(int Id)
+        {
+            RollerSampleInfo dbEntry = context.RollerSampleInfos.Find(Id);
+            if (dbEntry != null)
+            {
+                dbEntry.EndTime = DateTime.Now;
+            }
+            context.SaveChanges();
+        }
     }
 }

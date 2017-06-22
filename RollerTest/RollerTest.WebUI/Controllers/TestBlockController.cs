@@ -39,27 +39,40 @@ namespace RollerTest.WebUI.Controllers
         }
         public void OpenTest(int StationId)
         {
-            baserepo.ChangeStationState(StationId, true);
-            IniFileControl.GetInstance().OpenRollerTimeSwitch(baserepo.RollerBaseStations.FirstOrDefault(x => x.RollerBaseStationID == StationId).Station);
-            RollerSampleInfo rollersampleinfo = samplerepo.RollerSampleInfos.FirstOrDefault(x => x.RollerBaseStationID == StationId && x.State == true);
-            DealControl.GetInstance().setRollerLimit(StationId, rollersampleinfo.UpLimit, rollersampleinfo.DnLimit);
-            Response.Redirect("/TestBlock/Index");
-        }
-        public void PauseTest(int StationId)
-        {
-            IniFileControl.GetInstance().CloseRollerTimeSwitch(baserepo.RollerBaseStations.FirstOrDefault(x => x.RollerBaseStationID == StationId).Station);
+            if (baserepo.RollerBaseStations.FirstOrDefault(x => x.RollerBaseStationID == StationId).State == false)
+            {
+                baserepo.ChangeStationState(StationId, true);
+                IniFileControl.GetInstance().OpenRollerTimeSwitch(baserepo.RollerBaseStations.FirstOrDefault(x => x.RollerBaseStationID == StationId).Station);
+                RollerSampleInfo rollersampleinfo = samplerepo.RollerSampleInfos.FirstOrDefault(x => x.RollerBaseStationID == StationId && x.State == true);
+                samplerepo.setsampleStartTime(rollersampleinfo);
+                DealControl.GetInstance().setRollerLimit(StationId, rollersampleinfo.UpLimit, rollersampleinfo.DnLimit);
+            }
             Response.Redirect("/TestBlock/Index");
         }
         public void CloseTest(int StationId)
         {
-            baserepo.ChangeStationState(StationId, false);
-            int sampleId=samplerepo.RollerSampleInfos.FirstOrDefault(x => x.State == true && x.RollerBaseStationID == StationId).RollerSampleInfoID;
-            samplerepo.setsampleState(sampleId, false);
-            IniFileControl.GetInstance().CloseRollerTimeSwitch(baserepo.RollerBaseStations.FirstOrDefault(x => x.RollerBaseStationID == StationId).Station);
-            IniFileControl.GetInstance().CleanRollerTime(baserepo.RollerBaseStations.FirstOrDefault(x => x.RollerBaseStationID == StationId).Station);
+            if (baserepo.RollerBaseStations.FirstOrDefault(x => x.RollerBaseStationID == StationId).State == true)
+            {
+                baserepo.ChangeStationState(StationId, false);
+                int sampleId = samplerepo.RollerSampleInfos.FirstOrDefault(x => x.State == true && x.RollerBaseStationID == StationId).RollerSampleInfoID;
+                samplerepo.setsampleState(sampleId, false);
+                samplerepo.setsampleEndTime(sampleId);
+                IniFileControl.GetInstance().CloseRollerTimeSwitch(baserepo.RollerBaseStations.FirstOrDefault(x => x.RollerBaseStationID == StationId).Station);
+                IniFileControl.GetInstance().CleanRollerTime(baserepo.RollerBaseStations.FirstOrDefault(x => x.RollerBaseStationID == StationId).Station);
+            }
             Response.Redirect("/TestBlock/Index");
         }
-        public void CleanTest(int StationId)
+        public void OpenTimer(int StationId)
+        {
+            IniFileControl.GetInstance().OpenRollerTimeSwitch(baserepo.RollerBaseStations.FirstOrDefault(x => x.RollerBaseStationID == StationId).Station);
+            Response.Redirect("/TestBlock/Index");
+        }
+        public void PauseTimer(int StationId)
+        {
+            IniFileControl.GetInstance().CloseRollerTimeSwitch(baserepo.RollerBaseStations.FirstOrDefault(x => x.RollerBaseStationID == StationId).Station);
+            Response.Redirect("/TestBlock/Index");
+        }
+        public void CleanTimer(int StationId)
         {
             IniFileControl.GetInstance().CleanRollerTime(baserepo.RollerBaseStations.FirstOrDefault(x => x.RollerBaseStationID == StationId).Station);
             Response.Redirect("/TestBlock/Index");

@@ -80,7 +80,7 @@
                 <div class="tabs-container">
                     <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" href="#tab-A-@i"> <i class="fa fa-laptop">数据</i></a></li>
-                        <li class=""><a data-toggle="tab" href="#tab-C-@i"><i class="fa fa-database">记录</i></a></li>
+                        <li class=""><a data-toggle="tab" href="#tab-C-@i"><i class="fa fa-exchange">过程</i></a></li>
                     </ul>
                     <div class="tab-content">
                         <div id="tab-A-@i" class="tab-pane active">
@@ -94,10 +94,9 @@
                                                     <h1 id="time-@p.RollerBaseStation.Station" class="no-margins"></h1>
                                                     <div class="pull-right">
                                                         <div>
-                                                            @Html.ActionLink("开启","OpenTest",new { StationId = p.RollerBaseStationID},new {@class="btn btn-xs btn-white fa fa-thumbs-up"})
-                                                            @Html.ActionLink("暂停", "PauseTest", new { StationId = p.RollerBaseStationID }, new { @class = "btn btn-xs btn-white fa fa-thumbs-up" })
-                                                            @Html.ActionLink("关闭", "CloseTest", new { StationId = p.RollerBaseStationID }, new { @class = "btn btn-xs btn-white fa fa-thumbs-up" })
-                                                            @Html.ActionLink("清零", "CleanTest", new { StationId = p.RollerBaseStationID }, new { @class = "btn btn-xs btn-white fa fa-thumbs-up" })
+                                                            @Html.ActionLink("开启", "OpenTimer", new { StationId = p.RollerBaseStationID }, new { @class = "btn btn-xs btn-white fa fa-thumbs-up" })
+                                                            @Html.ActionLink("暂停", "PauseTimer", new { StationId = p.RollerBaseStationID }, new { @class = "btn btn-xs btn-white fa fa-thumbs-up" })
+                                                            @Html.ActionLink("清零", "CleanTimer", new { StationId = p.RollerBaseStationID }, new { @class = "btn btn-xs btn-white fa fa-thumbs-up" })
                                                         </div>
                                                         
                                                     </div>
@@ -117,35 +116,27 @@
                         </div>
                         <div id="tab-C-@i" class="tab-pane">
                             <div class="panel-body">
-                                <div class="ibox">
-                                    <div class="ibox-title">
-                                        <h5>试验记录</h5>
-                                    </div>
-                                    <div class="ibox-content">
-                                        <div>
-                                            <div class="feed-activity-list">
-                                                <div class="feed-element">
-                                                    <div class="media-body ">
-                                                        <strong>王 欢</strong> 提示 <br>
-                                                        <small class="text-muted">点击填写试验前及试验后状态判断。</small>
-                                                        <div class="pull-right">
-                                                            <a href="#"><input type="button" class="btn btn-xs btn-white fa fa-thumbs-up" value="样品判断" /></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="feed-element">
-                                                    <div class="media-body ">
-                                                        <strong>王 欢</strong> 提示 <br>
-                                                        <small class="text-muted">点击填写中间过程试验记录。</small>
-                                                        <div class="pull-right">
-                                                            <a href="#"><input type="button" class="btn btn-xs btn-white fa fa-thumbs-up" value="中间过程" /></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <ul class="list-group clear-list m-t">
+                                    <li class="list-group-item fist-item">
+                                        <span class="pull-right">
+                                            @Html.ActionLink("Click", "OpenTest", new { StationId = p.RollerBaseStationID }, new { @class = "btn btn-xs btn-white" })
+                                        </span>
+                                        <span class="label label-success">1</span>开启试验
+                                    </li>
+                                    <li class="list-group-item">
+                                        <span class="pull-right">
+                                            <a href="#"><input type="button" class="btn btn-xs btn-white" value="Click" /></a>
+                                        </span>
+                                        <span class="label label-info">2</span> 中间过程
+                                    </li>
+                                    <li class="list-group-item">
+                                        <span class="pull-right">
+                                            @Html.ActionLink("Click", "CloseTest", new { StationId = p.RollerBaseStationID }, new { @class = "btn btn-xs btn-white" })
+                                        </span>
+                                        <span class="label label-primary">3</span> 结束试验
+                                    </li>
+                                </ul>
+
                             </div>
                         </div>
                     </div>

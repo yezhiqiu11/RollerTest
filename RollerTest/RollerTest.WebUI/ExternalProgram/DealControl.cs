@@ -337,7 +337,7 @@ namespace RollerTest.WebUI.ExternalProgram
             {
                 Send(p.channel, p.data);
                 if (JudgeLimit(p)) {
-
+                    IniFileControl.GetInstance().CloseRollerTimeSwitch(faultdata.station);
                 };
             }
         }

@@ -10,5 +10,7 @@ namespace RollerTest.WebUI.Models
     {
         public RollerProjectInfo rollerprojectinfo { get; set; }
         public IEnumerable<RollerSampleInfo> rollersampleinfos {get;set;}
+        public ProjectListViewModel projectlistviewmodel { get; set; }
+
     }
 }

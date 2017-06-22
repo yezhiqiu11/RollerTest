@@ -81,6 +81,14 @@
       <HintPath>..\packages\Microsoft.ApplicationInsights.2.0.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.2\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -226,25 +234,35 @@
     <Compile Include="Controllers\RollerBaseLocationsController.cs" />
     <Compile Include="Controllers\RollerBaseStandardsController.cs" />
     <Compile Include="Controllers\TestBlockController.cs" />
+    <Compile Include="Controllers\UserRoleController.cs" />
     <Compile Include="ExternalProgram\CdioControl.cs" />
     <Compile Include="ExternalProgram\CdioCs.cs" />
     <Compile Include="ExternalProgram\CdioMethod.cs" />
     <Compile Include="ExternalProgram\DealCmd.cs" />
-    <Compile Include="ExternalProgram\DealMethod.cs" />
+    <Compile Include="ExternalProgram\DealControl.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
     <Compile Include="Infrastructure\NinjectControllerFactory.cs" />
+    <Compile Include="IniFiles\IniFile.cs" />
+    <Compile Include="IniFiles\IniFileControl.cs" />
+    <Compile Include="IniFiles\Profile.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ControlBlockViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ProjectListViewModel.cs" />
+    <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Models\SampleViewModel.cs" />
     <Compile Include="Models\SettingViewModel.cs" />
     <Compile Include="Models\TestListViewModel.cs" />
+    <Compile Include="Models\UserRolesViewModel.cs" />
+    <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SignalR\ChatHub.cs" />
+    <Compile Include="SignalR\DataHub.cs" />
+    <Compile Include="SignalR\TimeHub.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Tools\DistinctExtensions.cs" />
   </ItemGroup>
@@ -1224,6 +1242,8 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.2.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.2.min.js" />
     <Content Include="Scripts\plugins\blueimp\jquery.blueimp-gallery.min.js" />
     <Content Include="Scripts\plugins\bootstrap-markdown\bootstrap-markdown.js" />
     <Content Include="Scripts\plugins\bootstrap-markdown\markdown.js" />
@@ -1671,7 +1691,6 @@
     <Content Include="Views\Shared\_TopNavbar.cshtml" />
     <Content Include="Views\Shared\_RightSidebar.cshtml" />
     <Content Include="Views\ControlBlock\Index.cshtml" />
-    <Content Include="Views\ControlBlock\ReadInifileView.cshtml" />
     <Content Include="Views\RollerBaseConditions\Create.cshtml" />
     <Content Include="Views\RollerBaseConditions\Delete.cshtml" />
     <Content Include="Views\RollerBaseConditions\Details.cshtml" />
@@ -1689,16 +1708,22 @@
     <Content Include="Views\RollerBaseStandards\Index.cshtml" />
     <Content Include="Views\Sample\Index.cshtml" />
     <Content Include="Views\Project\EditProject.cshtml" />
-    <Content Include="Views\Project\ProjectMenu.cshtml" />
+    <Content Include="Views\Shared\ProjectMenu.cshtml" />
     <Content Include="Views\Sample\EditSample.cshtml" />
     <Content Include="Views\TestBlock\Index.cshtml" />
     <Content Include="Views\Sample\ViewInfo.cshtml" />
+    <Content Include="Views\TestBlock\RealtimeAction.cshtml" />
+    <Content Include="Views\Home\Chat.cshtml" />
     <Content Include="Views\RollerBaseStations\Create.cshtml" />
     <Content Include="Views\RollerBaseStations\Delete.cshtml" />
     <Content Include="Views\RollerBaseStations\Details.cshtml" />
     <Content Include="Views\RollerBaseStations\Edit.cshtml" />
     <Content Include="Views\RollerBaseStations\Index.cshtml" />
-    <Content Include="Views\TestBlock\RealtimeAction.cshtml" />
+    <Content Include="Views\UserRole\RoleIndex.cshtml" />
+    <Content Include="Views\UserRole\UserIndex.cshtml" />
+    <Content Include="Views\UserRole\UserRolesIndex.cshtml" />
+    <Content Include="Views\UserRole\Index.cshtml" />
+    <Content Include="Views\UserRole\LoginName.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RollerTest.Domain\RollerTest.Domain.csproj">

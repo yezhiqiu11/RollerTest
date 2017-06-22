@@ -13,13 +13,13 @@ namespace RollerTest.WebUI.ExternalProgram
         Cdio dio = new Cdio();
         public CdioMethod()
         {
-            //Ret = dio.Init("DIO000", out m_Id);
-            Ret = 0;//模拟电机运行
+            Ret = dio.Init("DIO000", out m_Id);
+            //Ret = 0;//模拟电机运行
         }
         public string InitDio()
         {
-            string ErrorString="";
-            //dio.GetErrorString(Ret, out ErrorString);
+            string ErrorString;
+            dio.GetErrorString(Ret, out ErrorString);
             if (Ret != 0)
             {
                 return ErrorString;

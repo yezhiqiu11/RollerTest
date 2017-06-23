@@ -13,5 +13,9 @@ namespace RollerTest.Domain.Abstract
         void SaveRollerSampleInfo(RollerSampleInfo rollersampleinfo);
 
         RollerSampleInfo DeleteRollerSampleInfo(int rollersampleinfoID);
+        void setsampleState(int Id, bool state);
+        void setsampleStartTime(RollerSampleInfo rollersampleinfo);
+        void setsampleEndTime(int Id);
+
     }
 }

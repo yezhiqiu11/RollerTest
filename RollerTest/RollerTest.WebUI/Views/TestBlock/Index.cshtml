@@ -70,7 +70,9 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-                    @*@{Html.RenderAction("RealtimeAction","TestBlock",new {RollerSampleInfoId=p.RollerSampleInfoID})}*@
+                    @*<div class="flot-chart">
+                        <div class="flot-chart-content" id="flot-line-chart"></div>
+                    </div>*@
                 </div>
             </div>
         </div>
@@ -78,8 +80,7 @@
                 <div class="tabs-container">
                     <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" href="#tab-A-@i"> <i class="fa fa-laptop">数据</i></a></li>
-                        <li class=""><a data-toggle="tab" href="#tab-B-@i"><i class="fa fa-desktop">试验</i></a></li>
-                        <li class=""><a data-toggle="tab" href="#tab-C-@i"><i class="fa fa-database">记录</i></a></li>
+                        <li class=""><a data-toggle="tab" href="#tab-C-@i"><i class="fa fa-exchange">过程</i></a></li>
                     </ul>
                     <div class="tab-content">
                         <div id="tab-A-@i" class="tab-pane active">
@@ -90,18 +91,21 @@
                                             <div class="feed-element">
                                                 <div class="media-body">
                                                     <small>Time</small>
-                                                    <h1 class="no-margins">12:30:59</h1>
+                                                    <h1 id="time-@p.RollerBaseStation.Station" class="no-margins"></h1>
                                                     <div class="pull-right">
-                                                        <a href="#"><input type="button" class="btn btn-xs btn-white fa fa-thumbs-up" value="开启" /></a>
-                                                        <a href="#"><input type="button" class="btn btn-xs btn-white fa fa-thumbs-up" value="关闭" /></a>
-                                                        <a href="#"><input type="button" class="btn btn-xs btn-white fa fa-thumbs-up" value="清零" /></a>
+                                                        <div>
+                                                            @Html.ActionLink("开启", "OpenTimer", new { StationId = p.RollerBaseStationID }, new { @class = "btn btn-xs btn-white fa fa-thumbs-up" })
+                                                            @Html.ActionLink("暂停", "PauseTimer", new { StationId = p.RollerBaseStationID }, new { @class = "btn btn-xs btn-white fa fa-thumbs-up" })
+                                                            @Html.ActionLink("清零", "CleanTimer", new { StationId = p.RollerBaseStationID }, new { @class = "btn btn-xs btn-white fa fa-thumbs-up" })
+                                                        </div>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="feed-element">
                                                 <div class="media-body">
                                                     <small>Force</small>
-                                                    <h1 class="no-margins">106,120N</h1>
+                                                    <h1 id="data-@p.RollerBaseStation.Station" class="no-margins"></h1>
                                                     </div>
                                                 </div>
                                         </div>
@@ -110,75 +114,28 @@
                                 </div>
                                 </div>
                         </div>
-                        <div id="tab-B-@i" class="tab-pane">
-                            <div class="panel-body">
-                                <div class="ibox">
-                                    <div class="ibox-title">
-                                        <h5>试验状态:</h5>
-                                        <div class="ibox-tools">
-                                            <span class="label label-warning-light">开启</span>
-                                        </div>
-                                    </div>
-                                    <div class="ibox-content">
-                                        <div>
-                                            <div class="feed-activity-list">
-                                                <div class="feed-element">
-                                                    <div class="media-body ">
-                                                        <strong>王 欢</strong> 提示 <br>
-                                                        <small class="text-muted">点击开启后，将开启后台试验任务。</small>
-                                                        <div class="pull-right">
-                                                            <a href="#"><input type="button" class="btn btn-xs btn-white fa fa-thumbs-up" value="开启" /></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="feed-element">
-                                                    <div class="media-body ">
-                                                        <strong>王 欢</strong> 提示 <br>
-                                                        <small class="text-muted">点击关闭后，将关闭后台试验任务。</small>
-                                                        <div class="pull-right">
-                                                            <a href="#"><input type="button" class="btn btn-xs btn-white fa fa-thumbs-up" value="关闭" /></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <div id="tab-C-@i" class="tab-pane">
                             <div class="panel-body">
-                                <div class="ibox">
-                                    <div class="ibox-title">
-                                        <h5>试验记录</h5>
-                                    </div>
-                                    <div class="ibox-content">
-                                        <div>
-                                            <div class="feed-activity-list">
-                                                <div class="feed-element">
-                                                    <div class="media-body ">
-                                                        <strong>王 欢</strong> 提示 <br>
-                                                        <small class="text-muted">点击填写试验前及试验后状态判断。</small>
-                                                        <div class="pull-right">
-                                                            @*<a href="#"><input type="button" class="btn btn-xs btn-white fa fa-thumbs-up" value="样品判断" /></a>*@
-                                                            @*@Html.ActionLink("样品判断", "SampleDecide", new { Controller = "TestBlock", RollerSampleInfoID= p.RollerSampleInfoID }, new { @class = "btn btn-white btn-sm" })*@
-                                                            @Html.ActionLink("样品判断", "SampleDecide", new {Controller="SampleDecide", RollerSampleInfoID=p.RollerSampleInfoID }, new { @class = "btn btn-white btn-sm" })
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="feed-element">
-                                                    <div class="media-body ">
-                                                        <strong>王 欢</strong> 提示 <br>
-                                                        <small class="text-muted">点击填写中间过程试验记录。</small>
-                                                        <div class="pull-right">
-                                                            <a href="#"><input type="button" class="btn btn-xs btn-white fa fa-thumbs-up" value="中间过程" /></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <ul class="list-group clear-list m-t">
+                                    <li class="list-group-item fist-item">
+                                        <span class="pull-right">
+                                            @Html.ActionLink("Click", "OpenTest", new { StationId = p.RollerBaseStationID }, new { @class = "btn btn-xs btn-white" })
+                                        </span>
+                                        <span class="label label-success">1</span>开启试验
+                                    </li>
+                                    <li class="list-group-item">
+                                        <span class="pull-right">
+                                            @Html.ActionLink("Click", "Index", new { Controller="SampleTestingRecord", RollerSampleInfoId = p.RollerSampleInfoID }, new { @class = "btn btn-xs btn-white" })
+                                        </span>
+                                        <span class="label label-info">2</span> 中间过程
+                                    </li>
+                                    <li class="list-group-item">
+                                        <span class="pull-right">
+                                            @Html.ActionLink("Click", "CloseTest", new { StationId = p.RollerBaseStationID }, new { @class = "btn btn-xs btn-white" })
+                                        </span>
+                                        <span class="label label-primary">3</span> 结束试验
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -189,3 +146,78 @@
     i++;
 }
 
+@section scripts{
+    <script src="~/Scripts/jquery.signalR-2.2.2.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script>
+        $(function () {
+            var time = $.connection.timeHub;
+            var data = $.connection.dataHub;
+            time.client.addNewTimeToPage = function (station, time) {
+                x1 = document.getElementById("time-1#");
+                x2 = document.getElementById("time-2#");
+                x3 = document.getElementById("time-3#");
+                x4 = document.getElementById("time-4#");
+                x5 = document.getElementById("time-5#");
+                x6 = document.getElementById("time-6#");
+                x7 = document.getElementById("time-7#");
+                x8 = document.getElementById("time-8#");
+                x9 = document.getElementById("time-9#");
+                x10 = document.getElementById("time-10#");
+                x11 = document.getElementById("time-11#");
+                x12 = document.getElementById("time-12#");
+                switch (station) {
+                    case "1#": x1.innerHTML =time; break;
+                    case "2#": x2.innerHTML = time; break;
+                    case "3#": x3.innerHTML = time; break;
+                    case "4#": x4.innerHTML = time; break;
+                    case "5#": x5.innerHTML = time; break;
+                    case "6#": x6.innerHTML = time; break;
+                    case "7#": x7.innerHTML = time; break;
+                    case "8#": x8.innerHTML = time; break;
+                    case "9#": x9.innerHTML = time; break;
+                    case "10#": x10.innerHTML = time; break;
+                    case "11#": x11.innerHTML = time; break;
+                    case "12#": x12.innerHTML = time; break;
+                }
+            }
+            data.client.addNewDataToPage = function (station, data) {
+                y1 = document.getElementById("data-1#");
+                y2 = document.getElementById("data-2#");
+                y3 = document.getElementById("data-3#");
+                y4 = document.getElementById("data-4#");
+                y5 = document.getElementById("data-5#");
+                y6 = document.getElementById("data-6#");
+                y7 = document.getElementById("data-7#");
+                y8 = document.getElementById("data-8#");
+                y9 = document.getElementById("data-9#");
+                y10 = document.getElementById("data-10#");
+                y11 = document.getElementById("data-11#");
+                y12 = document.getElementById("data-12#");
+
+                switch (station) {
+                    case "AI1-1-01": y1.innerHTML = data+"N"; break;
+                    case "AI1-1-02": y2.innerHTML = data + "N"; break;
+                    case "AI1-1-03": y3.innerHTML = data + "N"; break;
+                    case "AI1-1-04": y4.innerHTML = data + "N"; break;
+                    case "AI1-1-05": y5.innerHTML = data + "N"; break;
+                    case "AI1-1-06": y6.innerHTML = data + "N"; break;
+                    case "AI1-1-07": y7.innerHTML = data + "N"; break;
+                    case "AI1-1-08": y8.innerHTML = data + "N"; break;
+                    case "AI1-1-09": y9.innerHTML = data + "N"; break;
+                    case "AI1-1-10": y10.innerHTML = data + "N"; break;
+                    case "AI1-1-11": y11.innerHTML = data + "N"; break;
+                    case "AI1-1-12": y12.innerHTML = data + "N"; break;
+
+                }
+            }
+            $.connection.hub.start().done();
+
+
+        })
+
+    </script>
+
+
+
+}

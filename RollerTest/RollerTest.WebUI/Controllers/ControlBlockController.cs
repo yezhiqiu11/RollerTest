@@ -1,7 +1,7 @@
 ﻿using RollerTest.Domain.Abstract;
 using RollerTest.Domain.Concrete;
 using RollerTest.Domain.Entities;
-using RollerTest.Domain.IniFiles;
+using RollerTest.WebUI.IniFiles;
 using RollerTest.WebUI.ExternalProgram;
 using RollerTest.WebUI.Models;
 using System;
@@ -19,10 +19,13 @@ namespace RollerTest.WebUI.Controllers
         {
             IniFileControl inifileControl = IniFileControl.GetInstance();
             CdioControl cdioControl = CdioControl.GetInstance();
+            DealControl dealControl = DealControl.GetInstance();
             ViewData["FileTimerState"] = inifileControl.TimerState()==false?"关闭":"开启";
+            ViewData["TimerTimerState"] = inifileControl.Timer2State() == false ? "关闭" : "开启";
+            ViewData["DealState"] = dealControl.getConnectState()== false ? "断开" : "连接";
             if (cdioControl.InitMoto().Equals("Success"))
             {
-                ViewData["CdioInitState"] = "成功";
+                ViewData["CdioInitState"] = "连接";
             }
             else
             {
@@ -60,5 +63,48 @@ namespace RollerTest.WebUI.Controllers
             cdioControl.CloseTimer();
             Response.Redirect("/ControlBlock/Index");
         }
+        public void TimerOpenTimer()
+        {
+            IniFileControl inifileControl = IniFileControl.GetInstance();
+            inifileControl.OpenTimer2();
+            Response.Redirect("/ControlBlock/Index");
+        }
+        public void TimerCloseTimer()
+        {
+            IniFileControl inifileControl = IniFileControl.GetInstance();
+            inifileControl.CloseTimer2();
+            Response.Redirect("/ControlBlock/Index");
+        }
+        public void MotoRunning()
+        {
+            CdioControl cdioControl = CdioControl.GetInstance();
+            cdioControl.setMotoRunning();
+            Response.Redirect("/ControlBlock/Index");
+        }
+        public void MotoRunningREV()
+        {
+            CdioControl cdioControl = CdioControl.GetInstance();
+            cdioControl.setMotoRunningREV();
+            Response.Redirect("/ControlBlock/Index");
+        }
+        public void MotoStopping()
+        {
+            CdioControl cdioControl = CdioControl.GetInstance();
+            cdioControl.setMotoStopping();
+            Response.Redirect("/ControlBlock/Index");
+        }
+        public void ConnectDeal()
+        {
+            DealControl dealControl = DealControl.GetInstance();
+            dealControl.DealConnect();
+            Response.Redirect("/ControlBlock/Index");
+        }
+        public void CancelDeal()
+        {
+            DealControl dealControl = DealControl.GetInstance();
+            dealControl.DealConnectDis();
+            Response.Redirect("/ControlBlock/Index");
+        }
+
     }
 }

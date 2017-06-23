@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace RollerTest.WebUI.Models
@@ -49,9 +50,8 @@ namespace RollerTest.WebUI.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "电子邮件")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "用户名")]
+        public string Username { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -64,6 +64,9 @@ namespace RollerTest.WebUI.Models
 
     public class RegisterViewModel
     {
+        [Required]
+        [Display(Name = "用户名")]
+        public string UserName { get; set; }
         [Required]
         [EmailAddress]
         [Display(Name = "电子邮件")]
@@ -79,6 +82,13 @@ namespace RollerTest.WebUI.Models
         [Display(Name = "确认密码")]
         [Compare("Password", ErrorMessage = "密码和确认密码不匹配。")]
         public string ConfirmPassword { get; set; }
+        public ApplicationUser GetUser(){
+            var user = new ApplicationUser(){
+                UserName = this.UserName,
+                Email = this.Email,
+            };
+            return user;
+        }
     }
 
     public class ResetPasswordViewModel
@@ -109,4 +119,7 @@ namespace RollerTest.WebUI.Models
         [Display(Name = "电子邮件")]
         public string Email { get; set; }
     }
+
+
 }
+

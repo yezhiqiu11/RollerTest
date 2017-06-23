@@ -11,7 +11,9 @@ namespace RollerTest.Domain.Concrete
 {
     public class EFSampleinfoRepository : ISampleinfoRepository
     {
-        private EFDbContext context = ContextControl.GetInstance().getContext();
+        //private EFDbContext context = ContextControl.GetInstance().getContext();
+        private EFDbContext context = new EFDbContext();
+
 
         public IQueryable<RollerSampleInfo> RollerSampleInfos
         {
@@ -52,6 +54,33 @@ namespace RollerTest.Domain.Concrete
                     dbEntry.UpLimit = rollersampleinfo.UpLimit;
                     dbEntry.DnLimit = rollersampleinfo.DnLimit;
                 }
+            }
+            context.SaveChanges();
+        }
+        public void setsampleState(int Id,bool state)
+        {
+            RollerSampleInfo dbEntry = context.RollerSampleInfos.Find(Id);
+            if (dbEntry != null)
+            {
+                dbEntry.State = state;
+            }
+            context.SaveChanges();
+        }
+        public void setsampleStartTime(RollerSampleInfo rollersampleinfo)
+        {
+            RollerSampleInfo dbEntry = rollersampleinfo;
+            if (dbEntry != null)
+            {
+                dbEntry.StartTime = DateTime.Now;
+            }
+            context.SaveChanges();
+        }
+        public void setsampleEndTime(int Id)
+        {
+            RollerSampleInfo dbEntry = context.RollerSampleInfos.Find(Id);
+            if (dbEntry != null)
+            {
+                dbEntry.EndTime = DateTime.Now;
             }
             context.SaveChanges();
         }

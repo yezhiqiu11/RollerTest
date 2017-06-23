@@ -6,12 +6,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace RollerTest.Domain.Concrete
 {
     public class EFBaseRepository:IBaseRepository
     {
-        private EFDbContext context = ContextControl.GetInstance().getContext();
+        //private EFDbContext context = ContextControl.GetInstance().getContext();
+        private EFDbContext context = new EFDbContext();
         public IQueryable<RollerBaseLocation> RollerBaseLocations
         {
             get
@@ -40,6 +42,15 @@ namespace RollerTest.Domain.Concrete
                 return context.RollerBaseStations;
             }
         }
-       
+        public void ChangeStationState(int StationId,bool state)
+        {
+            RollerBaseStation dbEntry = context.RollerBaseStations.Find(StationId);
+                if (dbEntry != null)
+                {
+                dbEntry.State = state;
+                }
+            context.SaveChanges();
+        }
+
     }
 }

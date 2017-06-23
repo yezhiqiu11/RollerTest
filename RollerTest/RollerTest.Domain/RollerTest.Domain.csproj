@@ -70,7 +70,11 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Mvc">
+<<<<<<< HEAD
       <HintPath>..\..\..\..\..\..\..\Windows\Microsoft.NET\Framework\v4.0.30319\Temporary ASP.NET Files\root\dd0abeab\a5eb2ea9\assembly\dl3\c8dd400d\f12fe539_cfd2d201\System.Web.Mvc.DLL</HintPath>
+=======
+      <HintPath>E:\RollerTest-master\RollerTest-master\RollerTest\RollerTest.WebUI\bin\System.Web.Mvc.dll</HintPath>
+>>>>>>> refs/remotes/beingWH/master
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -100,16 +104,15 @@
     <Compile Include="Entities\RollerBaseLocation.cs" />
     <Compile Include="Entities\RollerBaseStation.cs" />
     <Compile Include="Entities\RollerBaseStandard.cs" />
+    <Compile Include="Entities\RollerLimit.cs" />
     <Compile Include="Entities\RollerProjectInfo.cs" />
     <Compile Include="Entities\RollerRealtimeInfo.cs" />
     <Compile Include="Entities\RollerRecordInfo.cs" />
     <Compile Include="Entities\RollerSampleInfo.cs" />
     <Compile Include="Entities\RollerTestreportInfo.cs" />
     <Compile Include="Entities\RollerTime.cs" />
-    <Compile Include="IniFiles\IniFile.cs" />
-    <Compile Include="IniFiles\IniFileControl.cs" />
-    <Compile Include="IniFiles\Profile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SeedDb\DbInitializer.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

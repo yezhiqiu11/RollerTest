@@ -14,6 +14,7 @@ namespace RollerTest.Domain.Abstract
         IQueryable<RollerBaseStandard> RollerBaseStandards { get; }
         IQueryable<RollerBaseStation> RollerBaseStations { get; }
 
+        void ChangeStationState(int StationId, bool state);
 
     }
 }

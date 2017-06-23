@@ -1,4 +1,6 @@
-﻿using RollerTest.Domain.Abstract;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using RollerTest.Domain.Abstract;
 using RollerTest.Domain.Concrete;
 using RollerTest.Domain.Entities;
 using RollerTest.WebUI.Models;
@@ -7,9 +9,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace RollerTest.WebUI.Controllers
 {
+    [Authorize(Roles ="Tester,Admin")]
     public class ProjectController : Controller
     {
         private IProjectRepository projectrepository;
@@ -22,9 +26,21 @@ namespace RollerTest.WebUI.Controllers
         [HttpPost]
         public ActionResult EditProject(RollerProjectInfo rollerprojectinfo)
         {
+            if (ModelState.IsValid)
+            {
+                projectrepository.SaveRollerProjectInfo(rollerprojectinfo);
+                return RedirectToAction("Index", "Sample");
+            }
+            else
+            {
+                SettingViewModel settingviewModel = new SettingViewModel(baserepository);
+                ViewData["StandardList"] = settingviewModel.GetStandardList();
+                ViewData["LocationList"] = settingviewModel.GetLocationList();
+                ViewData["ConditionList"] = settingviewModel.GetConditionList();
+                ViewData["DeviceList"] = settingviewModel.GetDeviceList();
+                return View(rollerprojectinfo);
+            }
 
-            projectrepository.SaveRollerProjectInfo(rollerprojectinfo);
-            return RedirectToAction("Index","Sample");
         }
         public ViewResult EditProject(int RollerProjectInfoID)
         {
@@ -50,17 +66,10 @@ namespace RollerTest.WebUI.Controllers
             ViewData["LocationList"] = settingviewModel.GetLocationList();
             ViewData["ConditionList"] = settingviewModel.GetConditionList();
             ViewData["DeviceList"] = settingviewModel.GetDeviceList();
-            return View("EditProject", new RollerProjectInfo());
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            ApplicationUser user = userManager.FindByNameAsync(User.Identity.Name).Result;
+            return View("EditProject", new RollerProjectInfo() { TestPerson = user.UserName });
         }
-        public PartialViewResult ProjectMenu()
-        {
-            ProjectListViewModel projectlistviewModel = new ProjectListViewModel()
-            {
-                rollerprojectinfos = projectrepository.RollerProjectInfos
-            };
-            return PartialView(projectlistviewModel);
-        }
-        // GET: Project
         public ActionResult Index()
         {
             return View();

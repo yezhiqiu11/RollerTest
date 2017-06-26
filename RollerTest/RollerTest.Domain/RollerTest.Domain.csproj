@@ -70,11 +70,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Mvc">
-<<<<<<< HEAD
-      <HintPath>..\..\..\..\..\..\..\Windows\Microsoft.NET\Framework\v4.0.30319\Temporary ASP.NET Files\root\dd0abeab\a5eb2ea9\assembly\dl3\c8dd400d\f12fe539_cfd2d201\System.Web.Mvc.DLL</HintPath>
-=======
-      <HintPath>E:\RollerTest-master\RollerTest-master\RollerTest\RollerTest.WebUI\bin\System.Web.Mvc.dll</HintPath>
->>>>>>> refs/remotes/beingWH/master
+
+    <HintPath>E:\RollerTest-master\RollerTest-master\RollerTest\RollerTest.WebUI\bin\System.Web.Mvc.dll</HintPath>
+
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
